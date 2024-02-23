@@ -23,12 +23,6 @@ export default defineSchema({
     name: v.optional(v.string()),
     emailVerified: v.optional(v.string()),
     image: v.optional(v.string()),
-    // custom fields
-    role: authUserRoles,
-    stripeSubscriptionId: v.optional(v.string()),
-    stripeCustomerId: v.optional(v.string()),
-    stripePriceId: v.optional(v.string()),
-    stripeCurrentPeriodEnd: v.optional(v.string()),
   }).index("by_user_email", ["email"]),
   /**
    * * Session table

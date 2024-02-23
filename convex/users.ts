@@ -17,7 +17,7 @@ export const create = mutation({
         name: args.name,
         emailVerified: args.emailVerified,
         image: args.image,
-        role: "User",
+        // role: "User",
       })
       .catch((err) => {
         console.error(err);
@@ -73,37 +73,6 @@ export const deleteUser = mutation({
   },
 });
 
-export const updateStripePayment = mutation({
-  args: {
-    userId: v.id("users"),
-    stripeSubscriptionId: v.string(),
-    stripeCustomerId: v.string(),
-    stripePriceId: v.string(),
-    stripeCurrentPeriodEnd: v.string(),
-  },
-  async handler(ctx, args) {
-    return await ctx.db.patch(args.userId, {
-      stripeSubscriptionId: args.stripeSubscriptionId,
-      stripeCustomerId: args.stripeCustomerId,
-      stripePriceId: args.stripePriceId,
-      stripeCurrentPeriodEnd: args.stripeCurrentPeriodEnd,
-    });
-  },
-});
-
-export const updateStripePaymentSucceed = mutation({
-  args: {
-    userId: v.id("users"),
-    stripePriceId: v.string(),
-    stripeCurrentPeriodEnd: v.string(),
-  },
-  async handler(ctx, args) {
-    return await ctx.db.patch(args.userId, {
-      stripePriceId: args.stripePriceId,
-      stripeCurrentPeriodEnd: args.stripeCurrentPeriodEnd,
-    });
-  },
-});
 
 /**
  * Gets a user by there email
