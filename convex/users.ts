@@ -1,9 +1,15 @@
 import { v } from "convex/values";
 import { QueryCtx, mutation, query } from "./_generated/server";
-import { userSchemaObject } from "./schema"
+
+const userArgs = {
+  email: v.string(),
+  name: v.optional(v.string()),
+  emailVerified: v.optional(v.string()),
+  image: v.optional(v.string()),
+};
 
 export const create = mutation({
-  args: userSchemaObject,
+  args: userArgs,
   async handler(ctx, args) {
     return await ctx.db
       .insert("users", {
@@ -11,6 +17,7 @@ export const create = mutation({
         name: args.name,
         emailVerified: args.emailVerified,
         image: args.image,
+        role: "User",
       })
       .catch((err) => {
         console.error(err);
@@ -40,7 +47,7 @@ export const getByEmail = query({
 export const update = mutation({
   args: {
     id: v.id("users"),
-    ...userSchemaObject,
+    ...userArgs,
   },
   async handler(ctx, args) {
     const user = await ctx.db.get(args.id);
@@ -63,6 +70,38 @@ export const deleteUser = mutation({
   },
   async handler(ctx, args) {
     return await ctx.db.delete(args.id);
+  },
+});
+
+export const updateStripePayment = mutation({
+  args: {
+    userId: v.id("users"),
+    stripeSubscriptionId: v.string(),
+    stripeCustomerId: v.string(),
+    stripePriceId: v.string(),
+    stripeCurrentPeriodEnd: v.string(),
+  },
+  async handler(ctx, args) {
+    return await ctx.db.patch(args.userId, {
+      stripeSubscriptionId: args.stripeSubscriptionId,
+      stripeCustomerId: args.stripeCustomerId,
+      stripePriceId: args.stripePriceId,
+      stripeCurrentPeriodEnd: args.stripeCurrentPeriodEnd,
+    });
+  },
+});
+
+export const updateStripePaymentSucceed = mutation({
+  args: {
+    userId: v.id("users"),
+    stripePriceId: v.string(),
+    stripeCurrentPeriodEnd: v.string(),
+  },
+  async handler(ctx, args) {
+    return await ctx.db.patch(args.userId, {
+      stripePriceId: args.stripePriceId,
+      stripeCurrentPeriodEnd: args.stripeCurrentPeriodEnd,
+    });
   },
 });
 

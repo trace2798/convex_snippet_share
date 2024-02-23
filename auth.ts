@@ -1,8 +1,11 @@
 import NextAuth from "next-auth";
 // import GitHub from "next-auth/providers/github";
 import Github from "next-auth/providers/github";
+import { ConvexAdapter } from "./lib/adapter";
 export const {
   handlers: { GET, POST },
+  signIn,
+  signOut,
   auth,
 } = NextAuth({
   providers: [
@@ -11,4 +14,31 @@ export const {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
+  // session: { strategy: "database" },
+  session: { strategy: "database" },
+  callbacks: {
+    async signIn({ account }) {
+      // Allow OAuth without email verification
+      console.log("ACCOUNT", account);
+      if (account?.provider !== "credentials") return true;
+      return true;
+    },
+    async session({ token, session }) {
+      console.log(token);
+      console.log(session);
+
+      return session;
+    },
+    async jwt({ token }) {
+      if (!token.sub) return token;
+      // const existingUser = useQuery(api.users.get, {
+      //   id: token.sub as Id<"users">,
+      // })
+      // console.log(existingUser);
+      console.log(token);
+
+      return token;
+    },
+  },
+  adapter: ConvexAdapter()
 });

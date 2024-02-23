@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { accountsSchemaObject } from "./schema"
 
 export const getUserByAccount = query({
   args: {
@@ -21,7 +20,19 @@ export const getUserByAccount = query({
 });
 
 export const create = mutation({
-  args: accountsSchemaObject,
+  args: {
+    userId: v.id("users"),
+    type: v.string(),
+    provider: v.string(),
+    providerAccountId: v.string(),
+    refreshToken: v.optional(v.string()),
+    accessToken: v.optional(v.string()),
+    expires_at: v.optional(v.number()),
+    token_type: v.optional(v.string()),
+    scope: v.optional(v.string()),
+    id_token: v.optional(v.string()),
+    session_state: v.optional(v.string()),
+  },
   async handler(ctx, args) {
     return await ctx.db.insert("accounts", {
       userId: args.userId,
