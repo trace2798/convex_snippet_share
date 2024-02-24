@@ -2,10 +2,6 @@ import { api } from "@/convex/_generated/api";
 import { Adapter, AdapterUser } from "@auth/core/adapters";
 import { convexClient } from "./convex";
 
-export type IUserRole = "User" | "Mod" | "Admin" | "Developer"
-export interface IAdapterUser extends AdapterUser {
-  role: IUserRole
-}
 
 export function ConvexAdapter(): Adapter {
   return {
@@ -196,7 +192,14 @@ export function ConvexAdapter(): Adapter {
       }
     },
     async deleteSession(sessionToken) {
-      return
+      try {
+        await convexClient.mutation(api.sessions.deleteSession, {
+            sessionToken,
+        })
+      } catch (error) {
+        console.error(error)
+        return null
+      }
     },
     async createVerificationToken({ identifier, expires, token }) {
       return null

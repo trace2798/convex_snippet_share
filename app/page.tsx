@@ -9,7 +9,7 @@ export default function Home() {
   // const session = useConvexAuth();
   const { data: session, status } = useSession();
 
-  console.log(session);
+  console.log("SESSION HOME", session);
   console.log(status);
 
   const user = useCurrentUser();
