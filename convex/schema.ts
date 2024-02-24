@@ -5,7 +5,7 @@ export const authUserRoles = v.union(
   v.literal("User"),
   v.literal("Mod"),
   v.literal("Admin"),
-  v.literal("Developer"),
+  v.literal("Developer")
 );
 
 /**
@@ -52,4 +52,16 @@ export default defineSchema({
     id_token: v.optional(v.string()),
     session_state: v.optional(v.string()),
   }).index("by_provider_account_id", ["providerAccountId"]),
+  snippets: defineTable({
+    title: v.string(),
+    userId: v.id("users"),
+    content: v.optional(v.string()),
+    notes: v.optional(v.string()),
+    backgroundColor: v.string(),
+    isPublic: v.boolean(),
+    language: v.string(),
+    padding: v.string(),
+    textSize: v.string(),
+    theme: v.optional(v.string()),
+  }).index("userId", ["userId"]),
 });
