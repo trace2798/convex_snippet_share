@@ -16,6 +16,8 @@ import type {
 } from "convex/server";
 import type * as accounts from "../accounts.js";
 import type * as sessions from "../sessions.js";
+import type * as snippet from "../snippet.js";
+import type * as snippets from "../snippets.js";
 import type * as users from "../users.js";
 
 /**
@@ -29,6 +31,8 @@ import type * as users from "../users.js";
 declare const fullApi: ApiFromModules<{
   accounts: typeof accounts;
   sessions: typeof sessions;
+  snippet: typeof snippet;
+  snippets: typeof snippets;
   users: typeof users;
 }>;
 export declare const api: FilterApi<

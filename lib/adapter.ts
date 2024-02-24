@@ -1,6 +1,6 @@
-import { api } from "@/convex/_generated/api";
 import { Adapter, AdapterUser } from "@auth/core/adapters";
 import { convexClient } from "./convex";
+import { api } from "@/convex/_generated/api";
 
 
 export function ConvexAdapter(): Adapter {

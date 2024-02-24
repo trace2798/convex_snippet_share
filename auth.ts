@@ -14,7 +14,7 @@ export const {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
-  // session: { strategy: "database" },
+  // session: { strategy: "jwt" },
   session: { strategy: "database" },
   callbacks: {
     async signIn({ account }) {

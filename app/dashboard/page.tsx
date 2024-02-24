@@ -1,13 +1,21 @@
+"use client";
 import { FC } from "react";
+// import { SnippetList } from "./_components/snippet-list";
+import { Id } from "@/convex/_generated/dataModel";
+import { useSession } from "next-auth/react";
+import { SnippetList } from "./_components/snippet-list";
 
-interface pageProps {}
+interface PersonalPageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const PersonalPage: FC<PersonalPageProps> = ({}) => {
+  const {data} = useSession();
+  
+  console.log(data?.user?.id)
   return (
     <>
-      <div>page</div>
+      <SnippetList userId={data?.user?.id as Id<"users">} />
     </>
   );
 };
 
-export default page;
+export default PersonalPage;
