@@ -35,7 +35,6 @@ export function ConvexAdapter(): Adapter {
                 email: user?.email,
                 emailVerified: user?.emailVerified ? new Date(user?.emailVerified) : undefined,
                 image: user?.image,
-                // role: user.role,
             } as AdapterUser
 
         } catch (error) {
@@ -57,7 +56,6 @@ export function ConvexAdapter(): Adapter {
             email: user?.email,
             emailVerified: user?.emailVerified ? new Date(user?.emailVerified) : undefined,
             image: user?.image,
-            // role: user.role,
         } as AdapterUser
 
       } catch (error) {
@@ -79,7 +77,6 @@ export function ConvexAdapter(): Adapter {
             email: user?.email,
             emailVerified: user?.emailVerified ? new Date(user?.emailVerified) : undefined,
             image: user?.image,
-            // role: user.role,
         } as AdapterUser
 
       } catch (error) {
@@ -104,7 +101,6 @@ export function ConvexAdapter(): Adapter {
             email: newUser.email,
             emailVerified: newUser.emailVerified ? new Date(newUser.emailVerified) : undefined,
             image: newUser.image,
-            // role: newUser.role,
         } as any
       } catch (error) {
         console.error(error)
@@ -173,7 +169,6 @@ export function ConvexAdapter(): Adapter {
                 email: data.user.email,
                 emailVerified: data.user.emailVerified ? new Date(data.user.emailVerified) : undefined,
                 image: data.user.image,
-                // role: data.user.role,
             } : null,
         } as any
       } catch (error) {
