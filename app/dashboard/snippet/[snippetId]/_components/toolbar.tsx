@@ -224,7 +224,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
                 {SUPPORTED_TEXT_SIZES.map((size) => (
                   <SelectItem
                     key={size.id}
-                    value={size.tailwindClass}
+                    value={size.pxValue}
                     onClick={() => setTextSize(size.tailwindClass)}
                   >
                     {size.label}

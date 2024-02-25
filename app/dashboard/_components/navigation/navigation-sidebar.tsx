@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { ModeToggle } from "../../../../components/mode-toggle";
 import { Building, Code, LayoutDashboard, PersonStanding } from "lucide-react";
 import Link from "next/link";
+import UserButton from "./user-button";
 
 export const NavigationSidebar = () => {
   return (
@@ -27,7 +28,7 @@ export const NavigationSidebar = () => {
         <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
           <ModeToggle />
           <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
-          {/* <UserButton /> */}
+          <UserButton />
         </div>
       </div>
     </>

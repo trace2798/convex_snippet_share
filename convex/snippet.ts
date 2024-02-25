@@ -30,8 +30,8 @@ export const create = mutation({
       backgroundColor: "#f43f5e",
       isPublic: true,
       language: "typescript",
-      padding: "p-10",
-      textSize: "text-base",
+      padding: "40px",
+      textSize: "16px",
     });
 
     return snippet;

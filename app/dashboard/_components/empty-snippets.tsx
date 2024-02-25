@@ -35,7 +35,7 @@ export const EmptySnippets = () => {
     })
       .then((id) => {
         toast.success("Snippet created");
-        router.push(`/snippet/${id}`);
+        router.push(`/dashboard/snippet/${id}`);
       })
       // .catch(() => toast.error("Failed to create snippet"));
       .catch((error) => console.error(error));

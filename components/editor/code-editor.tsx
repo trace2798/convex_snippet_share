@@ -4,11 +4,8 @@ import { useApiMutation } from "@/hooks/use-api-mutation";
 import { SUPPORTED_LANGUAGES } from "@/lib/language";
 import { cn } from "@/lib/utils";
 import ReactCodeMirror, { EditorView, ViewUpdate } from "@uiw/react-codemirror";
-import { Copy, CopyCheck } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { text } from "stream/consumers";
-import { useCopyToClipboard } from "usehooks-ts";
 import CodeTitleBar from "./code-title-bar";
 
 interface CodeEditorProps {
@@ -34,7 +31,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
   title,
 }) => {
   const { mutate, pending } = useApiMutation(
-    api.snippet_personal.updateContent
+    api.snippet.updateContent
   );
   // const [copiedText, copy] = useCopyToClipboard();
   const [originalcontent, setOriginalcontent] = useState(content);
@@ -70,16 +67,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
         toast.error("Failed to update content");
       })
   };
- // console.log("TEXT SIZE", textSize);
- // console.log("Padding SIZE", padding);
-  // const handleDownload = () => {
-  //   const element = document.createElement("a");
-  //   const file = new Blob([content], { type: "text/plain" });
-  //   element.href = URL.createObjectURL(file);
-  //   element.download = `${title}.${fileExtension}`;
-  //   document.body.appendChild(element); // Required for this to work in FireFox
-  //   element.click();
-  // };
+
   return (
     <>
       <div className="flex flex-col w-[250px] md:w-full">
@@ -93,9 +81,12 @@ const CodeEditor: FC<CodeEditorProps> = ({
         <ReactCodeMirror
           className={cn(
             "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto",
-            // `${padding}`,
-            `${textSize}`
+            // // `${padding}`,
+            // `${textSize}`
           )}
+          style={{
+            fontSize: `${textSize}`,
+          }}
           value={`${content}`}
           lang={`${language}`}
           extensions={[extension ? [extension] : [], EditorView.lineWrapping]}

@@ -20,13 +20,6 @@ const SnippetIdPage = ({ params }: SnippetIdPageProps) => {
   const snippet = useQuery(api.snippets.getById, {
     snippetId: params.snippetId as Id<"snippets">,
   });
-  //console.log("PARAMS ===>", params.snippetId);
-  // const { user } = useUser();
-  // console.log(user);
-  // const userName = user?.username;
-  // if (!userName) return null;
-  // const userFromDb = useQuery(api.users.get, { username: userName });
-  // console.log(userFromDb);
  
   console.log(snippet)
   return (

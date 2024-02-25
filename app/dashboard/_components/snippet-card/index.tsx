@@ -157,7 +157,7 @@ export const SnippetCard = ({
   // };
 
   return (
-    <Link href={`/snippet/${id}`}>
+    <Link href={`/dashboard/snippet/${id}`}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="text-sm">{title}</div>

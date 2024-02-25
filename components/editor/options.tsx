@@ -4,7 +4,7 @@ import { exportToPng } from "@/lib/utils";
 import { FC, useState } from "react";
 import { Button } from "../ui/button";
 import { useOrigin } from "@/hooks/use-origin";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, DownloadIcon, Image, Link } from "lucide-react";
 
 interface OptionsProps {
   container: any;
@@ -48,23 +48,20 @@ const Options: FC<OptionsProps> = ({
 
   return (
     <>
-      <div className="md:w-[50vw] flex flex-col md:flex-row md:flex-wrap justify-evenly my-6">
+      <div className="w-[300px] flex flex-col md:flex-row md:flex-wrap justify-evenly items-center my-6">
         <Button
           variant="outline"
-          className="mb-5 w-[250px]"
+          className=""
           onClick={() => exportToPng(container.current)}
         >
-          Download Snippet as Image
+          <Image className="h-4 w-4" />
         </Button>
-        <Button
-          variant="outline"
-          className="mb-5 w-[250px]"
-          onClick={handleDownload}
-        >
-          Download File
+        <Button variant="outline" onClick={handleDownload}>
+          <DownloadIcon className="h-4 w-4" />
         </Button>
         {isPublic && (
           <Button
+            variant="outline"
             onClick={onCopy}
             disabled={copied}
             className="h-8 rounded-l-none"
@@ -72,7 +69,7 @@ const Options: FC<OptionsProps> = ({
             {copied ? (
               <Check className="h-4 w-4" />
             ) : (
-              <Copy className="h-4 w-4" />
+              <Link className="h-4 w-4" />
             )}
           </Button>
         )}

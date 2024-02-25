@@ -1,6 +1,5 @@
 "use client";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
 import { useAction, useMutation } from "convex/react";
 import { Copy, CopyCheck, Sparkles } from "lucide-react";
 import { useSession } from "next-auth/react";

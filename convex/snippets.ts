@@ -29,8 +29,8 @@ export const get = query({
 export const getById = query({
   args: { snippetId: v.id("snippets") },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    console.log("IDENTITY ===>", identity);
+    // const identity = await ctx.auth.getUserIdentity();
+    // console.log("IDENTITY ===>", identity);
     const snippet = await ctx.db.get(args.snippetId);
 
     if (!snippet) {
@@ -45,9 +45,9 @@ export const getById = query({
       return snippet;
     }
 
-    if (!identity) {
-      throw new Error("Not authenticated");
-    }
+    // if (!identity) {
+    //   throw new Error("Not authenticated");
+    // }
 
     //   if (snippet.isPublic) {
     //     return snippet;

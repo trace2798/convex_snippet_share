@@ -27,7 +27,7 @@ export const NewSnippetButton = ({
     })
       .then((id) => {
         toast.success("snippet created");
-        router.push(`/snippet/${id}`);
+        router.push(`/dashboard/snippet/${id}`);
       })
       .catch(() => toast.error("Failed to create snippet"));
   };
