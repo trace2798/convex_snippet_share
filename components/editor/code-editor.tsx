@@ -15,6 +15,7 @@ interface CodeEditorProps {
   padding: string;
   textSize: string;
   title: string;
+  snipperAuthorId: string;
 }
 export type ContentEditableEvent = React.SyntheticEvent<any, Event> & {
   target: {
@@ -29,10 +30,9 @@ const CodeEditor: FC<CodeEditorProps> = ({
   padding,
   textSize,
   title,
+  snipperAuthorId,
 }) => {
-  const { mutate, pending } = useApiMutation(
-    api.snippet.updateContent
-  );
+  const { mutate, pending } = useApiMutation(api.snippet.updateContent);
   // const [copiedText, copy] = useCopyToClipboard();
   const [originalcontent, setOriginalcontent] = useState(content);
   const [extension, setExtension] = useState<any>(null);
@@ -65,7 +65,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
       })
       .catch(() => {
         toast.error("Failed to update content");
-      })
+      });
   };
 
   return (
@@ -76,13 +76,12 @@ const CodeEditor: FC<CodeEditorProps> = ({
           content={content}
           fileExtension={fileExtension}
           snippetId={id}
+          snipperAuthorId={snipperAuthorId}
         />
-        
+
         <ReactCodeMirror
           className={cn(
-            "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto",
-            // // `${padding}`,
-            // `${textSize}`
+            "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto"
           )}
           style={{
             fontSize: `${textSize}`,

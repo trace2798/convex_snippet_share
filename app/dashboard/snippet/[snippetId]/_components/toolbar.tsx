@@ -1,6 +1,11 @@
 // import { PickerExample } from "@/components/GradientPicker";
 import { GradientPicker } from "@/components/gradient-picker";
 import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -18,20 +23,11 @@ import { useBackgroundStore } from "@/store/color";
 import { useLanguageStore } from "@/store/language";
 import { usePaddingStore } from "@/store/padding";
 import { useTextSizeStore } from "@/store/textsize";
-import { useQuery } from "convex/react";
-import { FC, useEffect } from "react";
-import { toast } from "sonner";
-import VisibilitySwitch from "./visibility-switch";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { Button } from "@/components/ui/button";
-import { Globe, Lock } from "lucide-react";
-import * as Switch from "@radix-ui/react-switch";
 import { useVisibilityStore } from "@/store/visibility";
 import { Snippet } from "@/typing";
+import * as Switch from "@radix-ui/react-switch";
+import { FC, useEffect } from "react";
+import { toast } from "sonner";
 
 interface ToolbarProps {
   snippet: Snippet;

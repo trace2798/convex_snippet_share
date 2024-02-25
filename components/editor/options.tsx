@@ -5,6 +5,7 @@ import { FC, useState } from "react";
 import { Button } from "../ui/button";
 import { useOrigin } from "@/hooks/use-origin";
 import { Check, Copy, DownloadIcon, Image, Link } from "lucide-react";
+import { toast } from "sonner";
 
 interface OptionsProps {
   container: any;
@@ -27,12 +28,17 @@ const Options: FC<OptionsProps> = ({
   const [copied, setCopied] = useState(false);
   const extension = SUPPORTED_LANGUAGES.find((lang) => lang.id === language);
   const handleDownload = () => {
-    const element = document.createElement("a");
-    const file = new Blob([content], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = `${title}${extension?.fileExtension}`;
-    document.body.appendChild(element); // Required for this to work in FireFox
-    element.click();
+    try {
+      const element = document.createElement("a");
+      const file = new Blob([content], { type: "text/plain" });
+      element.href = URL.createObjectURL(file);
+      element.download = `${title}${extension?.fileExtension}`;
+      document.body.appendChild(element); // Required for this to work in FireFox
+      element.click();
+      toast.success("File downloaded");
+    } catch (error) {
+      toast.error("Failed to download file");
+    }
   };
 
   const url = `${origin}/preview/${id}`;
@@ -48,11 +54,11 @@ const Options: FC<OptionsProps> = ({
 
   return (
     <>
-      <div className="w-[300px] flex flex-col md:flex-row md:flex-wrap justify-evenly items-center my-6">
+      <div className="w-[300px] flex flex-row md:flex-wrap justify-evenly items-center my-6">
         <Button
           variant="outline"
           className=""
-          onClick={() => exportToPng(container.current)}
+          onClick={() => exportToPng(container.current, title)}
         >
           <Image className="h-4 w-4" />
         </Button>

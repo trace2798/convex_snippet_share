@@ -1,19 +1,15 @@
 "use client";
-import { FC } from "react";
-import Background from "./background";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
-import CodeEditor from "./code-editor";
 import { cn } from "@/lib/utils";
 import { Snippet } from "@/typing";
+import { FC } from "react";
+import Background from "./background";
+import CodeEditor from "./code-editor";
 
 interface EditorProps {
   snippet: Snippet;
 }
 
 const Editor: FC<EditorProps> = ({ snippet }) => {
-
   return (
     <>
       <div
@@ -29,6 +25,7 @@ const Editor: FC<EditorProps> = ({ snippet }) => {
             textSize={snippet?.textSize ?? "text-base"}
             padding={snippet?.padding ?? "p-10"}
             title={snippet?.title ?? "untitled"}
+            snipperAuthorId={snippet?.userId}
           />
         </Background>
       </div>

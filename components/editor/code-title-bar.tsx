@@ -12,6 +12,7 @@ interface CodeTitleBarProps {
   content: string;
   fileExtension: string;
   snippetId: string;
+  snipperAuthorId: string
 }
 
 const CodeTitleBar: FC<CodeTitleBarProps> = ({
@@ -19,6 +20,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
   content,
   fileExtension,
   snippetId,
+  snipperAuthorId
 }) => {
 //  console.log("TITLE ===>", title);
   const inputRef = useRef<ElementRef<"textarea">>(null);
@@ -43,7 +45,6 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
       });
   };
 
-  // const { user } = useUser();
   const session = useSession()
 
   return (
@@ -54,7 +55,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
           <span>{fileExtension}</span>
         </div>
         <div className="flex space-x-4">
-          {session && (
+          {/* {session.data?.user.id === snipperAuthorId && (
             <button
               aria-label="Explain With AI"
               onClick={() => handleSendMessage(content)}
@@ -62,7 +63,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
             >
               <Sparkles className="hover:text-indigo-400" />
             </button>
-          )}
+          )} */}
 
           <button
             aria-label="Copy Code"
