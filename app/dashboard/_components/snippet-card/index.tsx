@@ -15,6 +15,7 @@ import { Overlay } from "./overlay";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 // import { Actions } from "@/components/actions";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { Actions } from "./actions";
 // import { Actions } from "@/components/actions";
 
 interface SnippetCardProps {
@@ -40,7 +41,7 @@ export const SnippetCard = ({
 }: SnippetCardProps) => {
   // const { userId } = useAuth();
   const currentUser = useCurrentUser();
-  console.log("CurrentUSer===>", currentUser);
+  console.log("CurrentUSer ===>", currentUser);
   const authorLabel = userId === userId ? "You" : authorName;
   const createdAtLabel = formatDistanceToNow(createdAt, {
     addSuffix: true,
@@ -67,11 +68,11 @@ export const SnippetCard = ({
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="text-sm">{title}</div>
           <div>
-            {/* <Actions id={id} title={title} side="right">
+            <Actions id={id} title={title} side="right">
               <button className="">
                 <MoreHorizontal className="text-white opacity-75 hover:opacity-100 transition-opacity" />
               </button>
-            </Actions> */}
+            </Actions>
           </div>
         </CardHeader>
         <CardFooter className="text-sm">{createdAtLabel}</CardFooter>
