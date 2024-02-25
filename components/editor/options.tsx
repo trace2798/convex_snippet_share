@@ -6,6 +6,8 @@ import { Button } from "../ui/button";
 import { useOrigin } from "@/hooks/use-origin";
 import { Check, Copy, DownloadIcon, Image, Link } from "lucide-react";
 import { toast } from "sonner";
+import { HoverCard, HoverCardTrigger } from "../ui/hover-card";
+import { HoverCardContent } from "@radix-ui/react-hover-card";
 
 interface OptionsProps {
   container: any;
@@ -32,7 +34,7 @@ const Options: FC<OptionsProps> = ({
       const element = document.createElement("a");
       const file = new Blob([content], { type: "text/plain" });
       element.href = URL.createObjectURL(file);
-      const titleParts = title.split('/');
+      const titleParts = title.split("/");
       const lastPartOfTitle = titleParts[titleParts.length - 1];
       element.download = `${lastPartOfTitle}${extension?.fileExtension}`;
       document.body.appendChild(element); // Required for this to work in FireFox
@@ -48,38 +50,64 @@ const Options: FC<OptionsProps> = ({
   const onCopy = () => {
     navigator.clipboard.writeText(url);
     setCopied(true);
-
     setTimeout(() => {
       setCopied(false);
-    }, 1000);
+    }, 3000);
   };
 
   return (
     <>
       <div className="w-[300px] flex flex-row md:flex-wrap justify-evenly items-center my-6">
-        <Button
-          variant="outline"
-          className=""
-          onClick={() => exportToPng(container.current, title)}
-        >
-          <Image className="h-4 w-4" />
-        </Button>
-        <Button variant="outline" onClick={handleDownload}>
-          <DownloadIcon className="h-4 w-4" />
-        </Button>
+        <HoverCard>
+          <HoverCardTrigger>
+            {" "}
+            <Button
+              disabled={content.length === 0}
+              variant="outline"
+              className=""
+              onClick={() => exportToPng(container.current, title)}
+            >
+              <Image className="h-4 w-4" />
+            </Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="text-sm">
+            Download as PNG
+          </HoverCardContent>
+        </HoverCard>
+
+        <HoverCard>
+          <HoverCardTrigger>
+            {" "}
+            <Button variant="outline" onClick={handleDownload}>
+              <DownloadIcon className="h-4 w-4" />
+            </Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="text-sm">
+            Download as file
+          </HoverCardContent>
+        </HoverCard>
+
         {isPublic && (
-          <Button
-            variant="outline"
-            onClick={onCopy}
-            disabled={copied}
-            className="h-8 rounded-l-none"
-          >
-            {copied ? (
-              <Check className="h-4 w-4" />
-            ) : (
-              <Link className="h-4 w-4" />
-            )}
-          </Button>
+          <HoverCard>
+            <HoverCardTrigger>
+              {" "}
+              <Button
+                variant="outline"
+                onClick={onCopy}
+                disabled={copied}
+                className="h-8 rounded-l-none"
+              >
+                {copied ? (
+                  <Check className="h-4 w-4" />
+                ) : (
+                  <Link className="h-4 w-4" />
+                )}
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="text-sm">
+              Link to Share
+            </HoverCardContent>
+          </HoverCard>
         )}
       </div>
     </>
