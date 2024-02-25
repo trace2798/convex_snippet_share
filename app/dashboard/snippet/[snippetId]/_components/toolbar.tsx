@@ -35,17 +35,17 @@ interface ToolbarProps {
 const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
   const { mutate, pending } = useApiMutation(api.snippet.updateBackgroundColor);
 
-  const { mutate: mutateLanguage } = useApiMutation(api.snippet.updateLanguage);
+  const { mutate: mutateLanguage, pending: pendingLanguageChange } =
+    useApiMutation(api.snippet.updateLanguage);
 
-  const { mutate: mutateTextSize } = useApiMutation(api.snippet.updateTextSize);
+  const { mutate: mutateTextSize, pending: pendingTextSizeChange } =
+    useApiMutation(api.snippet.updateTextSize);
 
-  const { mutate: mutatePaddingSize } = useApiMutation(
-    api.snippet.updatePadding
-  );
+  const { mutate: mutatePaddingSize, pending: pendingPaddingSizeChange } =
+    useApiMutation(api.snippet.updatePadding);
 
-  const { mutate: mutateVisibility } = useApiMutation(
-    api.snippet.updateVisibility
-  );
+  const { mutate: mutateVisibility, pending: pendingVisibilityChange } =
+    useApiMutation(api.snippet.updateVisibility);
 
   const { background, setBackground } = useBackgroundStore();
   const { language, setLanguage } = useLanguageStore();
@@ -159,7 +159,10 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
               handleLanguageChange(snippet?._id, newLanguage)
             }
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger
+              className="w-[180px]"
+              disabled={pendingLanguageChange}
+            >
               <SelectValue
                 className="capitalize"
                 placeholder={snippet?.language}
@@ -187,7 +190,10 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
               handleTextSizeChange(snippet?._id, newTextSize)
             }
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger
+              disabled={pendingTextSizeChange}
+              className="w-[180px]"
+            >
               <SelectValue
                 className="capitalize"
                 placeholder={snippet?.textSize}
@@ -239,13 +245,13 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
         </div> */}
         <div>
           <h1 className="text-sm mb-2 text-muted-foreground">Padding Size</h1>
-          <Select
+          {/* <Select
             onValueChange={(newPaddingSize) => {
               handlePaddingChange(snippet?._id, newPaddingSize);
               setPadding(newPaddingSize);
             }}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger disabled={pendingPaddingSizeChange} className="w-[180px]">
               <SelectValue className="capitalize" placeholder={padding} />
             </SelectTrigger>
             <SelectContent>
@@ -256,7 +262,28 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
                     value={padding.pxValue}
                     onClick={() => setPadding(padding.pxValue)}
                   >
-                    {padding.label}
+                    {padding.pxValue}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select> */}
+          <Select
+            onValueChange={(newPaddingSize) => {
+              handlePaddingChange(snippet?._id, newPaddingSize);
+            }}
+          >
+            <SelectTrigger
+              disabled={pendingPaddingSizeChange}
+              className="w-[180px]"
+            >
+              <SelectValue className="capitalize" placeholder={padding} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {SUPPORTED_PADDING_SIZES.map((padding) => (
+                  <SelectItem key={padding.id} value={padding.pxValue}>
+                    {padding.pxValue}
                   </SelectItem>
                 ))}
               </SelectGroup>

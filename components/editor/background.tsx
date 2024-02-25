@@ -1,9 +1,9 @@
 "use client";
-import { FC, useRef, useState } from "react";
-import Options from "./options";
-import { useBackgroundStore } from "@/store/color";
 import { cn } from "@/lib/utils";
+import { useBackgroundStore } from "@/store/color";
 import { usePaddingStore } from "@/store/padding";
+import { FC, useRef } from "react";
+import Options from "./options";
 
 interface BackgroundProps {
   children: React.ReactNode;
@@ -15,6 +15,7 @@ const Background: FC<BackgroundProps> = ({ children, snippet }) => {
   const { background } = useBackgroundStore();
   const { padding } = usePaddingStore();
   const bg = snippet?.backgroundColor ?? background;
+  const pd = snippet?.padding ?? padding;
   return (
     <>
       <Options
@@ -28,9 +29,9 @@ const Background: FC<BackgroundProps> = ({ children, snippet }) => {
       <div
         ref={container}
         className={cn(
-          "flex top-0 justify-center w-fit items-center rounded-xl",
+          "flex top-0 justify-center w-fit items-center rounded-xl"
         )}
-        style={{ background: bg ?? background, padding: snippet?.padding }} // Use the background state to set the background color
+        style={{ background: bg ?? background, padding: pd }} // Use the background state to set the background color
       >
         {children}
       </div>

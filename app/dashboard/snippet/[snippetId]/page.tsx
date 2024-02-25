@@ -25,23 +25,27 @@ const SnippetIdPage = ({ params }: SnippetIdPageProps) => {
   const { data } = useSession();
   return (
     <>
-      <ResizablePanelGroup
-        direction="vertical"
-        className="min-h-[200px] rounded-lg border"
-      >
-        {data?.user.id === snippet?.userId && (
-          <>
-            <ResizablePanel defaultSize={15}>
-              <ToolBar snippet={snippet} />
-            </ResizablePanel>
-            <ResizableHandle withHandle />
-          </>
-        )}
+      <div className="pb-5">
+        {data?.user.id === snippet?.userId && <ToolBar snippet={snippet} />}
+        <Editor snippet={snippet} />
+        {/* <ResizablePanelGroup
+          direction="vertical"
+          className="min-h-[200px] mt-5 rounded-lg border"
+        >
+          {data?.user.id === snippet?.userId && (
+            <>
+              <ResizablePanel defaultSize={15}>
+                <ToolBar snippet={snippet} />
+              </ResizablePanel>
+              <ResizableHandle withHandle />
+            </>
+          )}
 
-        <ResizablePanel defaultSize={85}>
-          <Editor snippet={snippet} />
-        </ResizablePanel>
-      </ResizablePanelGroup>
+          <ResizablePanel defaultSize={85}>
+            <Editor snippet={snippet} />
+          </ResizablePanel>
+        </ResizablePanelGroup> */}
+      </div>
     </>
   );
 };

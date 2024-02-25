@@ -1,13 +1,13 @@
 "use client";
+import { useOrigin } from "@/hooks/use-origin";
 import { SUPPORTED_LANGUAGES } from "@/lib/language";
 import { exportToPng } from "@/lib/utils";
-import { FC, useState } from "react";
-import { Button } from "../ui/button";
-import { useOrigin } from "@/hooks/use-origin";
-import { Check, Copy, DownloadIcon, Image, Link } from "lucide-react";
-import { toast } from "sonner";
-import { HoverCard, HoverCardTrigger } from "../ui/hover-card";
 import { HoverCardContent } from "@radix-ui/react-hover-card";
+import { Check, DownloadIcon, Image, Link } from "lucide-react";
+import { FC, useState } from "react";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
+import { HoverCard, HoverCardTrigger } from "../ui/hover-card";
 
 interface OptionsProps {
   container: any;
@@ -58,22 +58,23 @@ const Options: FC<OptionsProps> = ({
   return (
     <>
       <div className="w-[300px] flex flex-row md:flex-wrap justify-evenly items-center my-6">
-        <HoverCard>
-          <HoverCardTrigger>
-            {" "}
-            <Button
-              disabled={content.length === 0}
-              variant="outline"
-              className=""
-              onClick={() => exportToPng(container.current, title)}
-            >
-              <Image className="h-4 w-4" />
-            </Button>
-          </HoverCardTrigger>
-          <HoverCardContent className="text-sm">
-            Download as PNG
-          </HoverCardContent>
-        </HoverCard>
+        {content ? (
+          <HoverCard>
+            <HoverCardTrigger>
+              {" "}
+              <Button
+                variant="outline"
+                className=""
+                onClick={() => exportToPng(container.current, title)}
+              >
+                <Image className="h-4 w-4" />
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="text-sm">
+              Download as PNG
+            </HoverCardContent>
+          </HoverCard>
+        ) : null}
 
         <HoverCard>
           <HoverCardTrigger>

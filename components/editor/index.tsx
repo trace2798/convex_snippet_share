@@ -53,7 +53,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
     <>
       <div
         className={cn(
-          "relative flex h-full w-full flex-col items-center  max-h-[100%]  overflow-y-auto"
+          "flex h-full w-full flex-col items-center"
         )}
       >
         <Background snippet={snippet}>
@@ -76,7 +76,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
                 snippet?.language ?? "typescript"
               )
             }
-            className="font-medium mt-5"
+            className="font-medium mt-5 hover:text-indigo-400"
             variant="ghost"
           >
             <Sparkles className="hover:text-indigo-400 w-5 h-5" />
@@ -96,7 +96,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
         {snippet?.notes && preview && (
           <Card className=" my-5 border-none max-w-3xl">
             {snippet.notes.split("\n").map((paragraph, index) => (
-              <CardDescription key={index} className="prose prose-invert">
+              <CardDescription key={index} className="p-1">
                 {paragraph}
               </CardDescription>
             ))}
