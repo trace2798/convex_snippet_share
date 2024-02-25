@@ -250,14 +250,13 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
                 </Switch.Root>
               </HoverCardTrigger>
               <HoverCardContent className="w-fit text-sm">
-                Click to make it private
+                Click to make it private. You cannot share a private snippet.
               </HoverCardContent>
             </HoverCard>
           ) : (
             <HoverCard>
               <HoverCardTrigger className="flex flex-col group">
                 <Switch.Root
-                  // checked={publicMode}
                   onCheckedChange={() =>
                     handleVisibilityChange(snippet?._id, true)
                   }
@@ -267,7 +266,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
                 </Switch.Root>
               </HoverCardTrigger>
               <HoverCardContent className="w-fit text-sm">
-                Click to make it public
+                Click to make it public. You can share a public snippet.
               </HoverCardContent>
             </HoverCard>
           )}

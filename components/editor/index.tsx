@@ -51,11 +51,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   };
   return (
     <>
-      <div
-        className={cn(
-          "flex h-full w-full flex-col items-center"
-        )}
-      >
+      <div className={cn("flex h-full w-full flex-col items-center")}>
         <Background snippet={snippet}>
           <CodeEditor
             id={snippet?._id}
@@ -94,7 +90,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
           </Textarea>
         )}
         {snippet?.notes && preview && (
-          <Card className=" my-5 border-none max-w-3xl">
+          <Card className="mx-[5vw] my-5 border-none max-w-3xl">
             {snippet.notes.split("\n").map((paragraph, index) => (
               <CardDescription key={index} className="p-1">
                 {paragraph}
