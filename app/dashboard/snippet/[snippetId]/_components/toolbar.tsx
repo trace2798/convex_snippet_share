@@ -31,37 +31,27 @@ import { Button } from "@/components/ui/button";
 import { Globe, Lock } from "lucide-react";
 import * as Switch from "@radix-ui/react-switch";
 import { useVisibilityStore } from "@/store/visibility";
+import { Snippet } from "@/typing";
 
 interface ToolbarProps {
-  snippetId: string;
+  snippet: Snippet;
 }
 
-const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
-  const { mutate, pending } = useApiMutation(
-    api.snippet.updateBackgroundColor
-  );
+const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
+  const { mutate, pending } = useApiMutation(api.snippet.updateBackgroundColor);
 
-  const { mutate: mutateLanguage } = useApiMutation(
-    api.snippet.updateLanguage
-  );
+  const { mutate: mutateLanguage } = useApiMutation(api.snippet.updateLanguage);
 
-  const { mutate: mutateTextSize } = useApiMutation(
-    api.snippet.updateTextSize
-  );
+  const { mutate: mutateTextSize } = useApiMutation(api.snippet.updateTextSize);
 
   const { mutate: mutatePaddingSize } = useApiMutation(
     api.snippet.updatePadding
   );
 
-  const snippet = useQuery(api.snippets.getById, {
-    snippetId: snippetId as Id<"snippets">,
-  });
-
   const { mutate: mutateVisibility } = useApiMutation(
     api.snippet.updateVisibility
   );
 
-  //console.log("BACK GROYBD ==>", snippet);
   const { background, setBackground } = useBackgroundStore();
   const { language, setLanguage } = useLanguageStore();
   const { textSize, setTextSize } = useTextSizeStore();
@@ -120,9 +110,6 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
       .catch(() => toast.error("Failed to update language"));
   };
 
- // console.log("Language", language);
- // console.log("Set Language", setLanguage);
-
   const handleTextSizeChange = (id: string, textSize: string) => {
     mutateTextSize({
       id: id as Id<"snippets">,
@@ -133,8 +120,6 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
       })
       .catch(() => toast.error("Failed to update text size"));
   };
- // console.log("Text Size", textSize);
- // console.log("Set Text Size", setTextSize);
 
   const handlePaddingChange = (id: string, padding: string) => {
     mutatePaddingSize({
@@ -146,8 +131,6 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
       })
       .catch(() => toast.error("Failed to update padding size"));
   };
-  //console.log("Padding Size", padding);
-  //console.log("Set Padding Size", setPadding);
 
   const handleVisibilityChange = (id: string, isPublic: boolean) => {
     mutateVisibility({
@@ -159,8 +142,6 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
       })
       .catch(() => toast.error("Failed to update visibility"));
   };
-  // console.log("Padding Size", padding);
-  // console.log("Set Padding Size", setPadding);
 
   return (
     <>
@@ -172,7 +153,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
             background={snippet?.backgroundColor ?? background}
             setBackground={(background: string) => {
               setBackground(background);
-              handleBackgroundChange(snippetId, background);
+              handleBackgroundChange(snippet?._id, background);
             }}
           />
         </div>
@@ -181,7 +162,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
           <br />
           <Select
             onValueChange={(newLanguage) =>
-              handleLanguageChange(snippetId, newLanguage)
+              handleLanguageChange(snippet?._id, newLanguage)
             }
           >
             <SelectTrigger className="w-[180px]">
@@ -210,7 +191,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
           <br />
           <Select
             onValueChange={(newTextSize) =>
-              handleTextSizeChange(snippetId, newTextSize)
+              handleTextSizeChange(snippet?._id, newTextSize)
             }
           >
             <SelectTrigger className="w-[180px]">
@@ -239,7 +220,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
           <br />
           <Select
             onValueChange={(newPaddingSize) =>
-              handlePaddingChange(snippetId, newPaddingSize)
+              handlePaddingChange(snippet?._id, newPaddingSize)
             }
           >
             <SelectTrigger className="w-[180px]">
@@ -272,7 +253,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
                 <Switch.Root
                   checked={true}
                   onCheckedChange={() =>
-                    handleVisibilityChange(snippetId, false)
+                    handleVisibilityChange(snippet._id, false)
                   }
                   className="w-11 p-px rounded-full bg-slate-500 data-[state=checked]:bg-sky-500 shadow-inner shadow-black/50 active:data-[state=checked]:bg-sky-400 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400 focus-visible:outline-2"
                 >
@@ -289,7 +270,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippetId }) => {
                 <Switch.Root
                   // checked={publicMode}
                   onCheckedChange={() =>
-                    handleVisibilityChange(snippetId, true)
+                    handleVisibilityChange(snippet?._id, true)
                   }
                   className="w-11 p-px rounded-full bg-slate-500 data-[state=checked]:bg-sky-500 shadow-inner shadow-black/50 active:data-[state=checked]:bg-sky-400 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400 focus-visible:outline-2"
                 >

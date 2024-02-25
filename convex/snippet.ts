@@ -217,11 +217,11 @@ export const updatePadding = mutation({
 export const updateTitle = mutation({
   args: { id: v.id("snippets"), title: v.string() },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
+    // const identity = await ctx.auth.getUserIdentity();
 
-    if (!identity) {
-      throw new Error("Unauthorized");
-    }
+    // if (!identity) {
+    //   throw new Error("Unauthorized");
+    // }
 
     // const author = await ctx.db
     //   .query("users")

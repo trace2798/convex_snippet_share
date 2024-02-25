@@ -1,15 +1,14 @@
 "use client";
 import Editor from "@/components/editor";
-import ToolBar from "./_components/toolbar";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { use } from "react";
 import { Id } from "@/convex/_generated/dataModel";
+import { useQuery } from "convex/react";
+import ToolBar from "./_components/toolbar";
 
 interface SnippetIdPageProps {
   params: {
@@ -29,11 +28,11 @@ const SnippetIdPage = ({ params }: SnippetIdPageProps) => {
         className="min-h-[200px] rounded-lg border"
       >
         <ResizablePanel defaultSize={15}>
-            <ToolBar snippetId={params.snippetId} />    
+            <ToolBar snippet={snippet} />    
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={85}>
-          <Editor snippetId={params.snippetId} />
+          <Editor snippet={snippet} />
         </ResizablePanel>
       </ResizablePanelGroup>
     </>
