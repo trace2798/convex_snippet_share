@@ -163,10 +163,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
               className="w-[180px]"
               disabled={pendingLanguageChange}
             >
-              <SelectValue
-                className="capitalize"
-                placeholder={snippet?.language}
-              />
+              <SelectValue className="capitalize" placeholder={language} />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -194,10 +191,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
               disabled={pendingTextSizeChange}
               className="w-[180px]"
             >
-              <SelectValue
-                className="capitalize"
-                placeholder={snippet?.textSize}
-              />
+              <SelectValue className="capitalize" placeholder={textSize} />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -214,60 +208,9 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
             </SelectContent>
           </Select>
         </div>
-        {/* <div>
-          Padding Size
-          <br />
-          <Select
-            onValueChange={(newPaddingSize) =>
-              handlePaddingChange(snippet?._id, newPaddingSize)
-            }
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue
-                className="capitalize"
-                placeholder={snippet?.padding}
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {SUPPORTED_PADDING_SIZES.map((padding) => (
-                  <SelectItem
-                    key={padding.id}
-                    value={padding.pxValue}
-                    onClick={() => setPadding(padding.pxValue)}
-                  >
-                    {padding.label}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div> */}
+
         <div>
           <h1 className="text-sm mb-2 text-muted-foreground">Padding Size</h1>
-          {/* <Select
-            onValueChange={(newPaddingSize) => {
-              handlePaddingChange(snippet?._id, newPaddingSize);
-              setPadding(newPaddingSize);
-            }}
-          >
-            <SelectTrigger disabled={pendingPaddingSizeChange} className="w-[180px]">
-              <SelectValue className="capitalize" placeholder={padding} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {SUPPORTED_PADDING_SIZES.map((padding) => (
-                  <SelectItem
-                    key={padding.id}
-                    value={padding.pxValue}
-                    onClick={() => setPadding(padding.pxValue)}
-                  >
-                    {padding.pxValue}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select> */}
           <Select
             onValueChange={(newPaddingSize) => {
               handlePaddingChange(snippet?._id, newPaddingSize);
@@ -328,7 +271,6 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
               </HoverCardContent>
             </HoverCard>
           )}
-          {/* <VisibilitySwitch isPublic={snippet?.isPublic} /> */}
         </div>
       </div>
     </>
