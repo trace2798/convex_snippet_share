@@ -21,6 +21,7 @@ export const chat = action({
   handler: async (ctx, args) => {
     const response = await openai.chat.completions.create({
       model: "codellama/CodeLlama-34b-Instruct-hf",
+      stream: true,
       messages: [
         {
           // Provide a 'system' message to give GPT context about how to respond
@@ -34,14 +35,25 @@ export const chat = action({
         },
       ],
     });
-
+    let messageContent = "";
+    for await (const part of response) {
+      if (part.choices[0].delta?.content) {
+        messageContent += part.choices[0].delta.content;
+        // Alternatively you could wait for complete words / sentences.
+        // Here we send an update on every stream message.
+        await ctx.runMutation(api.snippet.updateNote, {
+          id: args.snippetId as Id<"snippets">,
+          notes: messageContent ?? "",
+        });
+      }
+    }
     // Pull the message content out of the response
-    const messageContent = response.choices[0].message?.content;
-    console.log("MESSAGE CONTENT", messageContent);
-    await ctx.runMutation(api.snippet.updateNote, {
-      id: args.snippetId as Id<"snippets">,
-      notes: messageContent ?? "",
-    });
-    return messageContent;
+    // const messageContent = response.choices[0].message?.content;
+    // console.log("MESSAGE CONTENT", messageContent);
+    // await ctx.runMutation(api.snippet.updateNote, {
+    //   id: args.snippetId as Id<"snippets">,
+    //   notes: messageContent ?? "",
+    // });
+    // return messageContent;
   },
 });

@@ -22,9 +22,10 @@ interface EditorProps {
 const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   const { data } = useSession();
   const [originalcontent, setOriginalcontent] = useState(snippet?.notes);
+  const [isSaving, setIsSaving] = useState(false);
   const sendMessage = useAction(api.openai.chat);
   if (!snippet) <>Loading</>;
-  const { mutate } = useApiMutation(api.snippet.updateNote);
+  const { mutate, pending } = useApiMutation(api.snippet.updateNote);
   const handleSendMessage = async (text: string, language: string) => {
     await sendMessage({
       content: text,
@@ -38,15 +39,22 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   }, [snippet?.notes]);
 
   const handleNoteChange = (value: string) => {
+    setOriginalcontent(value);
+  };
+
+  const handleSave = () => {
+    setIsSaving(true);
     mutate({
       id: snippet?._id,
-      notes: value,
+      notes: originalcontent,
     })
       .then(() => {
         toast.success("Note Updated");
+        setIsSaving(false);
       })
       .catch(() => {
         toast.error("Failed to update note");
+        setIsSaving(false);
       });
   };
   return (
@@ -65,6 +73,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
         </Background>
         {data?.user.id == snippet?.userId && (
           <Button
+            disabled={pending}
             aria-label="Explain With AI"
             onClick={() =>
               handleSendMessage(
@@ -80,14 +89,24 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
           </Button>
         )}
 
-        {snippet?.notes && !preview && (
-          <Textarea
-            className="max-w-xl min-h-[200px]"
-            value={originalcontent}
-            onChange={(event) => handleNoteChange(event.target.value)}
-          >
-            {snippet?.notes}
-          </Textarea>
+        {snippet && !preview && (
+          <div className="mt-5 w-full flex justify-center items-center flex-col">
+            <Textarea
+              disabled={isSaving || pending}
+              className="max-w-3xl min-h-[200px]"
+              value={originalcontent}
+              onChange={(event) => handleNoteChange(event.target.value)}
+            >
+              {snippet?.notes}
+            </Textarea>
+            <Button
+              onClick={handleSave}
+              disabled={isSaving || originalcontent === snippet?.notes}
+              className="mt-5 w-[180px]"
+            >
+              {isSaving ? "Saving..." : "Save"}
+            </Button>
+          </div>
         )}
         {snippet?.notes && preview && (
           <Card className="mx-[5vw] my-5 border-none max-w-3xl">
