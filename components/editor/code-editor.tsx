@@ -7,6 +7,7 @@ import ReactCodeMirror, { EditorView, ViewUpdate } from "@uiw/react-codemirror";
 import { FC, useEffect, useState } from "react";
 import { toast } from "sonner";
 import CodeTitleBar from "./code-title-bar";
+import { Card, CardContent } from "../ui/card";
 
 interface CodeEditorProps {
   id: string;

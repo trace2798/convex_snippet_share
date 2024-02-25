@@ -15,17 +15,17 @@ export const chat = action({
   args: {
     content: v.string(),
     snippetId: v.string(),
+    language: v.string(),
   },
 
   handler: async (ctx, args) => {
     const response = await openai.chat.completions.create({
-      model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+      model: "codellama/CodeLlama-34b-Instruct-hf",
       messages: [
         {
           // Provide a 'system' message to give GPT context about how to respond
           role: "system",
-          content:
-            "add documentation to this code. It should be in this format:\n//in-line comment\n<Content>",
+          content: `Provide a brief explanation of what this code is doing. The code is written in ${args.language}. Generate the answer in a readable format with multiple paragraphs. `,
         },
         {
           // Pass on the chat user's message to GPT
@@ -38,9 +38,9 @@ export const chat = action({
     // Pull the message content out of the response
     const messageContent = response.choices[0].message?.content;
     console.log("MESSAGE CONTENT", messageContent);
-    await ctx.runMutation(api.snippet.updateContent, {
+    await ctx.runMutation(api.snippet.updateNote, {
       id: args.snippetId as Id<"snippets">,
-      content: messageContent ?? "",
+      notes: messageContent ?? "",
     });
     return messageContent;
   },

@@ -322,3 +322,40 @@ export const deleteSnippet = mutation({
     return snippet;
   },
 });
+
+export const updateNote = mutation({
+  args: { id: v.id("snippets"), notes: v.string() },
+  handler: async (ctx, args) => {
+    // const identity = await ctx.auth.getUserIdentity();
+
+    // if (!identity) {
+    //   throw new Error("Unauthorized");
+    // }
+
+    // const author = await ctx.db
+    //   .query("users")
+    //   .withIndex("tokenIdentifier", (q) =>
+    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
+    //   )
+    //   .unique();
+
+    const existingSnippet = await ctx.db.get(args.id);
+    //console.log("EXTENTING SNIPPET", existingSnippet);
+    if (!existingSnippet) {
+      return null;
+    }
+    //console.log(author);
+    // if (!author) {
+    //   return null;
+    // }
+    // if (existingSnippet?.authorId !== author._id) {
+    //   throw new Error("Unauthorized");
+    // }
+
+    const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
+      notes: args.notes,
+    });
+
+    return snippet;
+  },
+});

@@ -14,9 +14,7 @@ const Background: FC<BackgroundProps> = ({ children, snippet }) => {
   const container = useRef(null);
   const { background } = useBackgroundStore();
   const { padding } = usePaddingStore();
-  //console.log(snippet);
   const bg = snippet?.backgroundColor ?? background;
-  // console.log(bg);
   const paddingClass = snippet?.padding ?? padding;
   return (
     <>

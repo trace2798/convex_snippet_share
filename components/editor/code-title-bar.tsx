@@ -31,9 +31,9 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
   const sendMessage = useAction(api.openai.chat);
   const [newMessageText, setNewMessageText] = useState("");
   // async function handleSendMessage(event: React.FormEvent<HTMLFormElement>) {
-  const handleSendMessage = async (text: string) => {
-    await sendMessage({ content: text, snippetId: snippetId });
-  };
+  // const handleSendMessage = async (text: string) => {
+  //   await sendMessage({ content: text, snippetId: snippetId });
+  // };
 
   const handleCopy = (text: string) => () => {
     copy(text)
@@ -44,9 +44,6 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
         console.error("Failed to copy!", error);
       });
   };
-
-  const session = useSession()
-
   return (
     <>
       <div className="w-full py-3 px-3 pl-4 dark:bg-zinc-900 flex justify-between items-center text-sm">
@@ -55,16 +52,6 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
           <span>{fileExtension}</span>
         </div>
         <div className="flex space-x-4">
-          {/* {session.data?.user.id === snipperAuthorId && (
-            <button
-              aria-label="Explain With AI"
-              onClick={() => handleSendMessage(content)}
-              className="font-medium"
-            >
-              <Sparkles className="hover:text-indigo-400" />
-            </button>
-          )} */}
-
           <button
             aria-label="Copy Code"
             onClick={handleCopy(content)}
