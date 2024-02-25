@@ -32,7 +32,9 @@ const Options: FC<OptionsProps> = ({
       const element = document.createElement("a");
       const file = new Blob([content], { type: "text/plain" });
       element.href = URL.createObjectURL(file);
-      element.download = `${title}${extension?.fileExtension}`;
+      const titleParts = title.split('/');
+      const lastPartOfTitle = titleParts[titleParts.length - 1];
+      element.download = `${lastPartOfTitle}${extension?.fileExtension}`;
       document.body.appendChild(element); // Required for this to work in FireFox
       element.click();
       toast.success("File downloaded");

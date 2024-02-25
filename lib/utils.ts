@@ -10,10 +10,12 @@ export function cn(...inputs: ClassValue[]) {
 
 export function exportToPng(dom: any, title: string) {
   console.log(dom, "dom");
+  const titleParts = title.split("/");
+  const lastPartOfTitle = titleParts[titleParts.length - 1];
   domtoimage
     .toPng(dom)
     .then(function (dataUrl) {
-      saveAs(dataUrl, `${title}.png`);
+      saveAs(dataUrl, `${lastPartOfTitle}.png`);
       toast.success("Picture downloaded");
       console.log("dataUrl", dataUrl);
     })
