@@ -33,7 +33,7 @@ export const Actions = ({
   title,
 }: ActionsProps) => {
   const { onOpen } = useRenameModal();
-    // const { mutate, pending } = useApiMutation(api.board.remove);
+  const { mutate, pending } = useApiMutation(api.snippet.deleteSnippet);
 
   const onCopyLink = () => {
     navigator.clipboard
@@ -42,11 +42,11 @@ export const Actions = ({
       .catch(() => toast.error("Failed to copy link"));
   };
 
-  //   const onDelete = () => {
-  //     mutate({ id })
-  //       .then(() => toast.success("Board deleted"))
-  //       .catch(() => toast.error("Failed to delete board"));
-  //   };
+  const onDelete = () => {
+    mutate({ id })
+      .then(() => toast.success("Snippet deleted"))
+      .catch(() => toast.error("Failed to delete snippet"));
+  };
 
   return (
     <DropdownMenu>
@@ -72,7 +72,7 @@ export const Actions = ({
           header="Delete snippet?"
           description="This action is irreversible. Are you sure?"
           disabled={false}
-          onConfirm={() => {}}
+          onConfirm={() => onDelete()}
         >
           <Button
             variant="ghost"
