@@ -1,4 +1,3 @@
-// import { PickerExample } from "@/components/GradientPicker";
 import { GradientPicker } from "@/components/gradient-picker";
 import {
   HoverCard,
@@ -143,8 +142,8 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     <>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-6 pl-5 pt-5">
         <div>
-          Background
-          <br />
+          <h1 className="text-sm mb-2 text-muted-foreground">Background</h1>
+          {/* <br /> */}
           <GradientPicker
             background={snippet?.backgroundColor ?? background}
             setBackground={(background: string) => {
@@ -154,8 +153,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
           />
         </div>
         <div>
-          Language
-          <br />
+          <h1 className="text-sm mb-2 text-muted-foreground">Language</h1>
           <Select
             onValueChange={(newLanguage) =>
               handleLanguageChange(snippet?._id, newLanguage)
@@ -183,8 +181,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
           </Select>
         </div>
         <div>
-          Text Size
-          <br />
+          <h1 className="text-sm mb-2 text-muted-foreground">Text Size</h1>
           <Select
             onValueChange={(newTextSize) =>
               handleTextSizeChange(snippet?._id, newTextSize)
@@ -211,7 +208,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
             </SelectContent>
           </Select>
         </div>
-        <div>
+        {/* <div>
           Padding Size
           <br />
           <Select
@@ -239,10 +236,36 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
               </SelectGroup>
             </SelectContent>
           </Select>
-        </div>
+        </div> */}
         <div>
-          Visibility
-          <br />
+          <h1 className="text-sm mb-2 text-muted-foreground">Padding Size</h1>
+          <Select
+            onValueChange={(newPaddingSize) => {
+              handlePaddingChange(snippet?._id, newPaddingSize);
+              setPadding(newPaddingSize);
+            }}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue className="capitalize" placeholder={padding} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {SUPPORTED_PADDING_SIZES.map((padding) => (
+                  <SelectItem
+                    key={padding.id}
+                    value={padding.pxValue}
+                    onClick={() => setPadding(padding.pxValue)}
+                  >
+                    {padding.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div>
+          <h1 className="text-sm mb-2 text-muted-foreground">Visibility</h1>
           {snippet && snippet.isPublic ? (
             <HoverCard>
               <HoverCardTrigger className="flex flex-col group">

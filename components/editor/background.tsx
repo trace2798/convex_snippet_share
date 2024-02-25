@@ -15,7 +15,6 @@ const Background: FC<BackgroundProps> = ({ children, snippet }) => {
   const { background } = useBackgroundStore();
   const { padding } = usePaddingStore();
   const bg = snippet?.backgroundColor ?? background;
-  const paddingClass = snippet?.padding ?? padding;
   return (
     <>
       <Options
@@ -30,7 +29,6 @@ const Background: FC<BackgroundProps> = ({ children, snippet }) => {
         ref={container}
         className={cn(
           "flex top-0 justify-center w-fit items-center rounded-xl",
-          paddingClass
         )}
         style={{ background: bg ?? background, padding: snippet?.padding }} // Use the background state to set the background color
       >
