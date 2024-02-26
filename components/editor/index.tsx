@@ -13,6 +13,11 @@ import { Card, CardDescription } from "../ui/card";
 import { Textarea } from "../ui/textarea";
 import Background from "./background";
 import CodeEditor from "./code-editor";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "../ui/hover-card";
 
 interface EditorProps {
   snippet: Snippet;
@@ -21,6 +26,7 @@ interface EditorProps {
 
 const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   const { data } = useSession();
+  console.log("DATA ===>", data);
   const [originalcontent, setOriginalcontent] = useState(snippet?.notes);
   const [isSaving, setIsSaving] = useState(false);
   const sendMessage = useAction(api.openai.chat);
@@ -61,7 +67,6 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   return (
     <>
       <div className={cn("flex h-full w-full flex-col items-center")}>
-        
         <Background snippet={snippet}>
           <CodeEditor
             id={snippet?._id}
@@ -73,22 +78,33 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
             snipperAuthorId={snippet?.userId}
           />
         </Background>
-        {data?.user.id == snippet?.userId && (
-          <Button
-            disabled={pending}
-            aria-label="Explain With AI"
-            onClick={() =>
-              handleSendMessage(
-                snippet?.content ?? "Content",
-                snippet?.language ?? "typescript"
-              )
-            }
-            className="font-medium mt-5 hover:text-indigo-400"
-            variant="ghost"
-          >
-            <Sparkles className="hover:text-indigo-400 w-5 h-5" />
-            &nbsp; Explain Content with AI
-          </Button>
+        {data?.user.id == snippet?.userId && data?.user.aiCount && (
+          <HoverCard>
+            <HoverCardTrigger>
+              {" "}
+              <Button
+                disabled={pending || data?.user.aiCount >= 10}
+                aria-label="Explain With AI"
+                onClick={() =>
+                  handleSendMessage(
+                    snippet?.content ?? "Content",
+                    snippet?.language ?? "typescript"
+                  )
+                }
+                className="font-medium mt-5 hover:text-indigo-400"
+                variant="ghost"
+              >
+                <Sparkles className="hover:text-indigo-400 w-5 h-5" />
+                &nbsp; Explain Content with AI
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="text-sm">
+              10 AI generation for free. <br />
+              <span className="text-muted-foreground">
+                Current Count: {data.user.aiCount}
+              </span>
+            </HoverCardContent>
+          </HoverCard>
         )}
 
         {snippet && !preview && (

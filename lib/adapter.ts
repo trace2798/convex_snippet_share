@@ -182,6 +182,7 @@ export function ConvexAdapter(): Adapter {
                   ? new Date(data.user.emailVerified)
                   : undefined,
                 image: data.user.image,
+                aiCount: data.user.aiCount,
               }
             : null,
         } as any;

@@ -10,7 +10,7 @@ export const getSessionAndUser = query({
     const session = await ctx.db
       .query("sessions")
       .withIndex("by_session_token", (q) =>
-        q.eq("sessionToken", args.sessionToken),
+        q.eq("sessionToken", args.sessionToken)
       )
       .unique();
 
@@ -46,7 +46,7 @@ export const create = mutation({
       internal.sessions.destroyExpiredSessions,
       {
         sessionId: id,
-      },
+      }
     );
   },
 });
@@ -60,7 +60,7 @@ export const updateSession = mutation({
     const ses = await ctx.db
       .query("sessions")
       .withIndex("by_session_token", (q) =>
-        q.eq("sessionToken", args.sessionToken),
+        q.eq("sessionToken", args.sessionToken)
       )
       .unique();
     if (!ses) return null;
@@ -79,7 +79,7 @@ export const deleteSession = mutation({
     const ses = await ctx.db
       .query("sessions")
       .withIndex("by_session_token", (q) =>
-        q.eq("sessionToken", args.sessionToken),
+        q.eq("sessionToken", args.sessionToken)
       )
       .unique();
     if (!ses) return null;
