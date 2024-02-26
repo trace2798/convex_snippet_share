@@ -36,17 +36,22 @@ export const chat = action({
       ],
     });
     let messageContent = "";
-    for await (const part of response) {
-      if (part.choices[0].delta?.content) {
-        messageContent += part.choices[0].delta.content;
-        // Alternatively you could wait for complete words / sentences.
-        // Here we send an update on every stream message.
-        await ctx.runMutation(api.snippet.updateNote, {
-          id: args.snippetId as Id<"snippets">,
-          notes: messageContent ?? "",
-        });
+    try {
+      for await (const part of response) {
+        if (part.choices[0].delta?.content) {
+          messageContent += part.choices[0].delta.content;
+          // Alternatively you could wait for complete words / sentences.
+          // Here we send an update on every stream message.
+          await ctx.runMutation(api.snippet.updateNote, {
+            id: args.snippetId as Id<"snippets">,
+            notes: messageContent ?? "",
+          });
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
+
     // Pull the message content out of the response
     // const messageContent = response.choices[0].message?.content;
     // console.log("MESSAGE CONTENT", messageContent);
