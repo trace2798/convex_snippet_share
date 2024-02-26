@@ -1,5 +1,10 @@
 import { v } from "convex/values";
-import { QueryCtx, mutation, query } from "./_generated/server";
+import {
+  QueryCtx,
+  internalMutation,
+  mutation,
+  query,
+} from "./_generated/server";
 
 const userArgs = {
   email: v.string(),
@@ -17,6 +22,7 @@ export const create = mutation({
         name: args.name,
         emailVerified: args.emailVerified,
         image: args.image,
+        aiCount: 0,
         // role: "User",
       })
       .catch((err) => {
@@ -89,3 +95,15 @@ export async function getUserWithEmail(ctx: QueryCtx, email: string) {
       return null;
     });
 }
+
+export const increaseUserAICount = internalMutation({
+  args: { userId: v.id("users") },
+  handler: async (ctx, args) => {
+    const user = await ctx.db.get(args.userId);
+    if (!user || user.aiCount === undefined) {
+      return null;
+    }
+    const updatedAICount = user?.aiCount + 1;
+    await ctx.db.patch(args.userId, { aiCount: updatedAICount });
+  },
+});

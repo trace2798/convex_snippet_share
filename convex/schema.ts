@@ -23,6 +23,7 @@ export default defineSchema({
     name: v.optional(v.string()),
     emailVerified: v.optional(v.string()),
     image: v.optional(v.string()),
+    aiCount: v.optional(v.number()),
   }).index("by_user_email", ["email"]),
   /**
    * * Session table

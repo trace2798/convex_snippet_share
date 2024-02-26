@@ -2,7 +2,7 @@
 import OpenAI from "openai";
 import { action } from "./_generated/server";
 import { v } from "convex/values";
-import { api } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 import { Id } from "./_generated/dataModel";
 
 // Initialize the OpenAI client with the given API key
@@ -16,9 +16,12 @@ export const chat = action({
     content: v.string(),
     snippetId: v.string(),
     language: v.string(),
+    userId: v.id("users"),
   },
 
   handler: async (ctx, args) => {
+    // const snippet = await ctx.db.get(args.snippetId as Id<"snippets">);
+
     const response = await openai.chat.completions.create({
       model: "codellama/CodeLlama-34b-Instruct-hf",
       stream: true,
@@ -48,6 +51,9 @@ export const chat = action({
           });
         }
       }
+      await ctx.runMutation(internal.users.increaseUserAICount, {
+        userId: args.userId as Id<"users">,
+      });
     } catch (error) {
       console.log(error);
     }

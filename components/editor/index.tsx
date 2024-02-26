@@ -31,6 +31,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
       content: text,
       snippetId: snippet?._id,
       language: language,
+      userId: snippet?.userId,
     });
   };
 

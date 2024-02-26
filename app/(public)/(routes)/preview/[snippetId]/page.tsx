@@ -2,10 +2,8 @@
 
 import { useQuery } from "convex/react";
 import { useEffect, useState } from "react";
-
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-
 import Editor from "@/components/editor";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useApiMutation } from "@/hooks/use-api-mutation";
