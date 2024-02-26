@@ -15,6 +15,7 @@ import HomeOptions from "./home-options";
 import ToolBar from "@/app/dashboard/snippet/[snippetId]/_components/toolbar";
 import CodeTitleBar from "../editor/code-title-bar";
 import { SUPPORTED_LANGUAGES } from "@/lib/language";
+import { Spinner } from "../spinner";
 
 const content = `Easily share your code snippet with anyone.
 
@@ -63,8 +64,7 @@ export const Heading = () => {
       <div>
         {status === "loading" && (
           <div className="w-full flex items-center justify-center">
-            {/* <Spinner size="lg" /> */}
-            <h1>Loading</h1>
+            <Spinner size="lg" />
           </div>
         )}
         {status === "authenticated" && (
