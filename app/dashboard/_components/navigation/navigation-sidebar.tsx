@@ -3,7 +3,7 @@
 import { Separator } from "@/components/ui/separator";
 // import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "../../../../components/mode-toggle";
-import { Building, Code, LayoutDashboard, PersonStanding } from "lucide-react";
+import { ActivityIcon, Building, Code, LayoutDashboard, PersonStanding } from "lucide-react";
 import Link from "next/link";
 import UserButton from "./user-button";
 
@@ -27,6 +27,9 @@ export const NavigationSidebar = () => {
         <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
         <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
           <ModeToggle />
+          <Link href="/dashboard/aiactivity">
+          <ActivityIcon className="h-7 w-7 hover:cursor-pointer hover:text-indigo-400" />
+        </Link>
           <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
           <UserButton />
         </div>
