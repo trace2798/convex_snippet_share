@@ -1,15 +1,11 @@
 "use client";
 import Editor from "@/components/editor";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
+import { Snippet } from "@/typing";
 import { useQuery } from "convex/react";
-import ToolBar from "./_components/toolbar";
 import { useSession } from "next-auth/react";
+import ToolBar from "./_components/toolbar";
 
 interface SnippetIdPageProps {
   params: {
@@ -19,7 +15,7 @@ interface SnippetIdPageProps {
 const SnippetIdPage = ({ params }: SnippetIdPageProps) => {
   const snippet = useQuery(api.snippets.getById, {
     snippetId: params.snippetId as Id<"snippets">,
-  });
+  }) as Snippet;
 
   console.log(snippet);
   const { data } = useSession();

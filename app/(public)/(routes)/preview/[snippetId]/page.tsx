@@ -1,14 +1,15 @@
 "use client";
 
-import { useMutation, useQuery } from "convex/react";
-import dynamic from "next/dynamic";
-import { useMemo } from "react";
+import { useQuery } from "convex/react";
+import { useEffect, useState } from "react";
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 
-import { Skeleton } from "@/components/ui/skeleton";
 import Editor from "@/components/editor";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { Snippet } from "@/typing";
 
 interface SnippetIdPageProps {
   params: {
@@ -17,10 +18,21 @@ interface SnippetIdPageProps {
 }
 
 const SnippetIdPage = ({ params }: SnippetIdPageProps) => {
+  const [countIncremented, setCountIncremented] = useState(false);
   const snippet = useQuery(api.snippets.getById, {
     snippetId: params.snippetId,
-  });
+  }) as Snippet;
+
+  const { mutate, pending } = useApiMutation(api.snippet.incrementCount);
+
   console.log(snippet);
+
+  useEffect(() => {
+    if (snippet && !countIncremented) {
+      mutate({ id: params.snippetId });
+      setCountIncremented(true); // Set the state variable to true after incrementing
+    }
+  }, [snippet]);
 
   if (snippet == undefined) {
     return (

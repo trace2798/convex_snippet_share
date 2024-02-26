@@ -1,7 +1,8 @@
 import { v } from "convex/values";
 
-import { query } from "./_generated/server";
+import { internalMutation, query } from "./_generated/server";
 import { Id } from "./_generated/dataModel";
+import { internal } from "./_generated/api";
 
 export const get = query({
   args: {
@@ -70,7 +71,12 @@ export const getById = query({
     //     location: snippet._id,
     //   });
     // }
+    // await ctx.runMutation(internal.snippet.incrementCount, {
+    //   id: args.snippetId as Id<"snippets">,
+    // });
 
     return snippet;
   },
 });
+
+// export const incrementCountBySnippetId = internalMutation()

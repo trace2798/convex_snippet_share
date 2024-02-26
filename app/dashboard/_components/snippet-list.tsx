@@ -11,7 +11,7 @@ interface SnippetListProps {
 }
 
 export const SnippetList = ({ userId }: SnippetListProps) => {
-  console.log(userId);
+  // console.log(userId);
   // if (userId === undefined) {
   //   return (
   //     <div>
@@ -31,7 +31,7 @@ export const SnippetList = ({ userId }: SnippetListProps) => {
   const data = useQuery(api.snippets.get, {
     userId: userId,
   });
-  console.log(data);
+  // console.log(data);
   if (data === undefined) {
     return (
       <div>

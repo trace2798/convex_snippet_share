@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 
-import { mutation } from "./_generated/server";
+import { internalMutation, mutation } from "./_generated/server";
 import { Id } from "./_generated/dataModel";
 
 export const create = mutation({
@@ -32,6 +32,7 @@ export const create = mutation({
       language: "typescript",
       padding: "40px",
       textSize: "16px",
+      viewCount: 0,
     });
 
     return snippet;
@@ -357,5 +358,17 @@ export const updateNote = mutation({
     });
 
     return snippet;
+  },
+});
+
+export const incrementCount = mutation({
+  args: { id: v.id("snippets") },
+  handler: async (ctx, args) => {
+    const existingSnippet = await ctx.db.get(args.id);
+    if (!existingSnippet || existingSnippet.viewCount === undefined) {
+      return null;
+    }
+    const updatedViewCount = existingSnippet?.viewCount + 1;
+    await ctx.db.patch(args.id, { viewCount: updatedViewCount });
   },
 });

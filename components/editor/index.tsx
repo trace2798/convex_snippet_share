@@ -60,6 +60,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   return (
     <>
       <div className={cn("flex h-full w-full flex-col items-center")}>
+        
         <Background snippet={snippet}>
           <CodeEditor
             id={snippet?._id}
@@ -78,7 +79,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
             onClick={() =>
               handleSendMessage(
                 snippet?.content ?? "Content",
-                snippet?.language ?? "typescript",
+                snippet?.language ?? "typescript"
               )
             }
             className="font-medium mt-5 hover:text-indigo-400"
