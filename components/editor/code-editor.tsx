@@ -45,7 +45,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
   useEffect(() => {
     // Find the selected language in your SUPPORTED_LANGUAGES array
     const languageDefinition = SUPPORTED_LANGUAGES.find(
-      (lang) => lang.id === language
+      (lang) => lang.id === language,
     );
 
     let fileExtension = "";
@@ -82,7 +82,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
 
         <ReactCodeMirror
           className={cn(
-            "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto"
+            "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto",
           )}
           style={{
             fontSize: `${textSize}`,

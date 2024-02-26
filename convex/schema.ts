@@ -5,7 +5,7 @@ export const authUserRoles = v.union(
   v.literal("User"),
   v.literal("Mod"),
   v.literal("Admin"),
-  v.literal("Developer")
+  v.literal("Developer"),
 );
 
 /**

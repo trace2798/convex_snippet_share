@@ -16,7 +16,7 @@ export const EmptySnippets = () => {
   //console.log(userId);
   const { data } = useSession();
   const userId = data?.user?.id;
-  console.log(userId)
+  console.log(userId);
   if (!userId) {
     return (
       <>

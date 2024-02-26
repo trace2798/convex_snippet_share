@@ -40,5 +40,5 @@ export const {
       return token;
     },
   },
-  adapter: ConvexAdapter()
+  adapter: ConvexAdapter(),
 });

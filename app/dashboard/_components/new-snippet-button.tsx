@@ -42,9 +42,7 @@ export const NewSnippetButton = ({
       >
         <Plus className="h-5 w-5 stroke-1" />
         &nbsp; New snippet
-
       </Button>
-    
     </>
   );
 };

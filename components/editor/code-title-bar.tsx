@@ -6,13 +6,12 @@ import { useSession } from "next-auth/react";
 import { ElementRef, FC, useRef, useState } from "react";
 import { useCopyToClipboard } from "usehooks-ts";
 
-
 interface CodeTitleBarProps {
   title: string;
   content: string;
   fileExtension: string;
   snippetId: string;
-  snipperAuthorId: string
+  snipperAuthorId: string;
 }
 
 const CodeTitleBar: FC<CodeTitleBarProps> = ({
@@ -20,9 +19,9 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
   content,
   fileExtension,
   snippetId,
-  snipperAuthorId
+  snipperAuthorId,
 }) => {
-//  console.log("TITLE ===>", title);
+  //  console.log("TITLE ===>", title);
   const inputRef = useRef<ElementRef<"textarea">>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(title);

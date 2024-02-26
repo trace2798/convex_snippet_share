@@ -45,7 +45,6 @@ export function GradientPicker({
   setBackground: (background: string) => void;
   className?: string;
 }) {
- 
   const solids = [
     // Slate
     "#f8fafc",
@@ -348,7 +347,6 @@ export function GradientPicker({
     "linear-gradient(to top left, #ff75c3, #ffa647, #ffe83f, #9fff5b, #70e2ff, #cd93ff)",
   ];
 
-
   const defaultTab = useMemo(() => {
     if (background.includes("url")) return "image";
     if (background.includes("gradient")) return "gradient";
@@ -363,7 +361,7 @@ export function GradientPicker({
           className={cn(
             "w-[220px] justify-start text-left font-normal",
             !background && "text-muted-foreground",
-            className
+            className,
           )}
         >
           <div className="w-full flex items-center gap-2">

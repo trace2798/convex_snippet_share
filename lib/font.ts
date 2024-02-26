@@ -17,7 +17,7 @@ export const SUPPORTED_TEXT_SIZES: SizesDefinition[] = [
     id: "text-xs",
     label: "Extra Small",
     tailwindClass: "text-xs",
-    pxValue: "12px"
+    pxValue: "12px",
   },
   {
     id: "text-sm",
@@ -29,18 +29,18 @@ export const SUPPORTED_TEXT_SIZES: SizesDefinition[] = [
     id: "text-base",
     label: "Base",
     tailwindClass: "text-base",
-    pxValue: "16px"
+    pxValue: "16px",
   },
   {
     id: "text-lg",
     label: "Large",
     tailwindClass: "text-lg",
-    pxValue: "18px"
+    pxValue: "18px",
   },
   {
     id: "text-xl",
     label: "Extra Large",
     tailwindClass: "text-xl",
-    pxValue: "20px"
+    pxValue: "20px",
   },
 ];

@@ -73,7 +73,6 @@ export const deleteUser = mutation({
   },
 });
 
-
 /**
  * Gets a user by there email
  * @param ctx The Convex Query Context

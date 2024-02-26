@@ -5,7 +5,7 @@ import { FC, useState } from "react";
 
 export default function VisibilitySwitch({ isPublic }: { isPublic: boolean }) {
   const [publicMode, setPublicMode] = useState(isPublic);
-  
+
   return (
     <>
       <p>Document is Public {publicMode ? "Yes" : "no"}</p>

@@ -31,7 +31,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <Toaster />
-               <ModalProvider/>
+              <ModalProvider />
               {children}
             </ThemeProvider>
           </ConvexClientProvider>

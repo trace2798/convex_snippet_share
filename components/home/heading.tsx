@@ -1,14 +1,14 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import ReactCodeMirror, { EditorView } from "@uiw/react-codemirror";
-import { useSession } from "next-auth/react";
-import { Social } from "../auth/social";
 import { javascript } from "@codemirror/lang-javascript";
+import ReactCodeMirror, { EditorView } from "@uiw/react-codemirror";
+import { ArrowRight } from "lucide-react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRef, useState } from "react";
+import { Social } from "../auth/social";
 import CodeTitleBar from "../editor/code-title-bar";
 import { Spinner } from "../spinner";
 import HomeOptions from "./home-options";
@@ -44,7 +44,7 @@ export const Heading = () => {
           />
           <ReactCodeMirror
             className={cn(
-              "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base"
+              "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base",
             )}
             value={`${content}`}
             extensions={[

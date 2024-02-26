@@ -15,7 +15,7 @@ export function useAuthFromNextAuth() {
         return (await response.json()) as string;
       }
     },
-    []
+    [],
   );
 
   return useMemo(
@@ -24,6 +24,6 @@ export function useAuthFromNextAuth() {
       isAuthenticated: !!data,
       fetchAccessToken,
     }),
-    [fetchAccessToken, data, status]
+    [fetchAccessToken, data, status],
   );
 }

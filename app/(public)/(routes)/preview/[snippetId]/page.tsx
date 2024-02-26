@@ -20,7 +20,7 @@ const SnippetIdPage = ({ params }: SnippetIdPageProps) => {
   const snippet = useQuery(api.snippets.getById, {
     snippetId: params.snippetId,
   });
-console.log(snippet)
+  console.log(snippet);
 
   if (snippet == undefined) {
     return (
