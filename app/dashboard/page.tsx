@@ -1,6 +1,5 @@
 "use client";
 import { FC } from "react";
-// import { SnippetList } from "./_components/snippet-list";
 import { Id } from "@/convex/_generated/dataModel";
 import { useSession } from "next-auth/react";
 import { SnippetList } from "./_components/snippet-list";

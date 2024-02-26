@@ -1,5 +1,6 @@
 "use client";
 
+import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -10,20 +11,10 @@ import { toast } from "sonner";
 
 export const EmptySnippets = () => {
   const router = useRouter();
-
-  // const { user } = useUser();
-  // console.log(user);
-  //console.log(userId);
   const { data } = useSession();
   const userId = data?.user?.id;
   console.log(userId);
-  if (!userId) {
-    return (
-      <>
-        <h1>Loading...</h1>
-      </>
-    );
-  }
+
   const { mutate, pending } = useApiMutation(api.snippet.create);
 
   const onClick = () => {
@@ -40,6 +31,14 @@ export const EmptySnippets = () => {
       // .catch(() => toast.error("Failed to create snippet"));
       .catch((error) => console.error(error));
   };
+
+  if (!userId) {
+    return (
+      <>
+        <Spinner size="lg" />
+      </>
+    );
+  }
 
   return (
     <div className="h-full flex flex-col items-center justify-center">
