@@ -2,25 +2,21 @@
 
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import ReactCodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { useSession } from "next-auth/react";
 import { Social } from "../auth/social";
-// import { Spinner } from "@/components/spinner";
 import { javascript } from "@codemirror/lang-javascript";
-import { useEffect, useRef, useState } from "react";
-import HomeOptions from "./home-options";
-import ToolBar from "@/app/dashboard/snippet/[snippetId]/_components/toolbar";
+import { useRef } from "react";
 import CodeTitleBar from "../editor/code-title-bar";
-import { SUPPORTED_LANGUAGES } from "@/lib/language";
 import { Spinner } from "../spinner";
+import HomeOptions from "./home-options";
 
 const content = `Easily share your code snippet with anyone.
 
 Login to get started.
-This is my submission for Convex Zero to One Hackathon.`;
+`;
 
 export const Heading = () => {
   const container = useRef(null);
