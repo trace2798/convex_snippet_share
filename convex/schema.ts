@@ -64,6 +64,11 @@ export default defineSchema({
     padding: v.string(),
     textSize: v.string(),
     theme: v.optional(v.string()),
-    viewCount: v.optional(v.number())
+    viewCount: v.optional(v.number()),
+  }).index("userId", ["userId"]),
+  aiactivity: defineTable({
+    userId: v.id("users"),
+    snippetId: v.id("snippets"),
+    ai_answer: v.string(),
   }).index("userId", ["userId"]),
 });

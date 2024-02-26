@@ -54,6 +54,11 @@ export const chat = action({
       await ctx.runMutation(internal.users.increaseUserAICount, {
         userId: args.userId as Id<"users">,
       });
+      await ctx.runMutation(internal.aiactivity.create, {
+        userId: args.userId as Id<"users">,
+        snippetId: args.snippetId as Id<"snippets">,
+        content: messageContent,
+      });
     } catch (error) {
       console.log(error);
     }
