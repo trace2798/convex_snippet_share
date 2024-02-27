@@ -15,9 +15,9 @@ import { FC } from "react";
 import { SnippetCard } from "../_components/snippet-card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-interface pageProps {}
+interface AiActivityPageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const AiActivityPageProps: FC<AiActivityPageProps> = ({}) => {
   const { data } = useSession();
   const activities = useQuery(api.aiactivity.get, {
     userId: data?.user?.id as Id<"users">,
@@ -69,7 +69,7 @@ const page: FC<pageProps> = ({}) => {
   );
 };
 
-export default page;
+export default AiActivityPageProps;
 
 SnippetCard.Skeleton = function SnippetCardSkeleton() {
   return (
