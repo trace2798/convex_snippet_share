@@ -96,7 +96,7 @@ const HomeOptions: FC<HomeOptionsProps> = ({
                 variant="outline"
                 onClick={onCopy}
                 disabled={copied}
-                className="h-8 rounded-l-none"
+                className=""
               >
                 {copied ? (
                   <Check className="h-4 w-4" />

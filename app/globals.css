@@ -8,6 +8,16 @@ body,
   height: 100%;
 }
 
+.beams {
+  background-image: url("../public/hero@75.jpg");
+  background-size: 150rem;
+}
+
+:global(.dark) .beams {
+  background-image: url("../public/hero-dark@90.jpg");
+  background-size: 86.125rem;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

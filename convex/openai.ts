@@ -23,8 +23,8 @@ export const chat = action({
     // const snippet = await ctx.db.get(args.snippetId as Id<"snippets">);
 
     const response = await openai.chat.completions.create({
-      model: "codellama/CodeLlama-34b-Instruct-hf",
-      stream: true,
+      model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+      // stream: true,
       messages: [
         {
           // Provide a 'system' message to give GPT context about how to respond
@@ -38,38 +38,51 @@ export const chat = action({
         },
       ],
     });
-    let messageContent = "";
+    // let messageContent = "";
+    // try {
+    //   for await (const part of response) {
+    //     if (part.choices[0].delta?.content) {
+    //       messageContent += part.choices[0].delta.content;
+    //       console.log("MESSAGE CONTENT", messageContent);
+    //       // Alternatively you could wait for complete words / sentences.
+    //       // Here we send an update on every stream message.
+    //       await ctx.runMutation(api.snippet.updateNote, {
+    //         id: args.snippetId as Id<"snippets">,
+    //         notes: messageContent ?? "",
+    //       });
+    //     }
+    //   }
+    //   await ctx.runMutation(internal.users.increaseUserAICount, {
+    //     userId: args.userId as Id<"users">,
+    //   });
+    //   await ctx.runMutation(internal.aiactivity.create, {
+    //     userId: args.userId as Id<"users">,
+    //     snippetId: args.snippetId as Id<"snippets">,
+    //     content: messageContent,
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    // Pull the message content out of the response
     try {
-      for await (const part of response) {
-        if (part.choices[0].delta?.content) {
-          messageContent += part.choices[0].delta.content;
-          // Alternatively you could wait for complete words / sentences.
-          // Here we send an update on every stream message.
-          await ctx.runMutation(api.snippet.updateNote, {
-            id: args.snippetId as Id<"snippets">,
-            notes: messageContent ?? "",
-          });
-        }
-      }
+      const messageContent = response.choices[0].message?.content;
+      console.log("MESSAGE CONTENT", messageContent);
+      await ctx.runMutation(api.snippet.updateNote, {
+        id: args.snippetId as Id<"snippets">,
+        notes: messageContent ?? "",
+      });
       await ctx.runMutation(internal.users.increaseUserAICount, {
         userId: args.userId as Id<"users">,
       });
       await ctx.runMutation(internal.aiactivity.create, {
         userId: args.userId as Id<"users">,
         snippetId: args.snippetId as Id<"snippets">,
-        content: messageContent,
+        content: messageContent || "",
       });
+      return messageContent;
     } catch (error) {
       console.log(error);
     }
-
-    // Pull the message content out of the response
-    // const messageContent = response.choices[0].message?.content;
-    // console.log("MESSAGE CONTENT", messageContent);
-    // await ctx.runMutation(api.snippet.updateNote, {
-    //   id: args.snippetId as Id<"snippets">,
-    //   notes: messageContent ?? "",
-    // });
-    // return messageContent;
   },
 });

@@ -11,12 +11,12 @@ import { useRef, useState } from "react";
 import { Social } from "../auth/social";
 import CodeTitleBar from "../editor/code-title-bar";
 import { Spinner } from "../spinner";
+import { Separator } from "../ui/separator";
 import HomeOptions from "./home-options";
 
-const content = `Easily share your code snippet with anyone.
+const content = `Easily share your code snippet with anyone.\n\nLogin to get started.\n`;
 
-Login to get started.
-`;
+const authenticatedContent = `Easily share your code snippet with anyone.`;
 
 export const Heading = () => {
   const container = useRef(null);
@@ -24,7 +24,16 @@ export const Heading = () => {
   const [originalcontent, setOriginalcontent] = useState(content);
 
   return (
-    <div className="max-w-3xl space-y-4 justify-center flex flex-col items-center align-middle">
+    <div className="relative max-w-3xl space-y-4 justify-center flex flex-col items-center align-middle">
+      <Separator className="bg-slate-700 border border-dashed md:w-[60vw]" />
+      <Separator
+        className="bg-slate-700 border border-dashed z-10 absolute left-0 h-[60vh]"
+        orientation="vertical"
+      />
+      <Separator
+        className="bg-slate-700 border border-dashed z-10 absolute right-0 h-[60vh]"
+        orientation="vertical"
+      />
       <HomeOptions
         container={container}
         content={originalcontent}
@@ -33,8 +42,13 @@ export const Heading = () => {
         language="typescript"
         title="home"
       />
+      <Separator className="bg-slate-700 my-5 border border-dashed w-full md:w-[60vw]" />
+
       <div ref={container}>
-        <div className="p-10 mb-5 bg-gradient-to-r from-blue-200 via-sky-500 to-blue-400 rounded-lg">
+        <div
+          ref={container}
+          className="p-10 bg-gradient-to-r from-blue-200 via-sky-500 to-blue-400 rounded-lg"
+        >
           <CodeTitleBar
             title={"home"}
             content={originalcontent}
@@ -46,18 +60,19 @@ export const Heading = () => {
             className={cn(
               "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base",
             )}
-            value={`${content}`}
+            value={`${status === "authenticated" ? `${authenticatedContent}\n\nWelcome, ${session?.user?.name}\n` : `${content}`}`}
             extensions={[
               javascript({ jsx: true, typescript: true }),
               EditorView.lineWrapping,
             ]}
             readOnly={false}
-            theme={"dark"}
+            theme="dark"
             placeholder="//Enter code snippet here..."
             onChange={setOriginalcontent}
           />
         </div>
       </div>
+      <Separator className="bg-slate-700 my-5 border border-dashed w-full md:w-[60vw]" />
       <div>
         {status === "loading" && (
           <div className="w-full flex items-center justify-center">
@@ -74,6 +89,8 @@ export const Heading = () => {
         )}
         {status === "unauthenticated" && <Social />}
       </div>
+
+      <Separator className="bg-slate-700 my-5 border border-dashed w-full md:w-[60vw]" />
     </div>
   );
 };
