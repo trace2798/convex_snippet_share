@@ -3,7 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { javascript } from "@codemirror/lang-javascript";
-import ReactCodeMirror, { EditorView } from "@uiw/react-codemirror";
+import ReactCodeMirror, {
+  EditorView,
+  highlightActiveLine,
+} from "@uiw/react-codemirror";
 import { ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -14,7 +17,7 @@ import { Spinner } from "../spinner";
 import { Separator } from "../ui/separator";
 import HomeOptions from "./home-options";
 
-const content = `Easily share your code snippet with anyone.\n\nLogin to get started.\n`;
+const content = `Easily share your code snippet with anyone.\n\nLogin to get started\n`;
 
 const authenticatedContent = `Easily share your code snippet with anyone.`;
 
@@ -25,13 +28,13 @@ export const Heading = () => {
 
   return (
     <div className="relative max-w-3xl space-y-4 justify-center flex flex-col items-center align-middle">
-      <Separator className="bg-slate-700 border border-dashed md:w-[60vw]" />
+      <Separator className="dark:bg-slate-800 bg-neutral-100 border border-dashed md:w-[60vw]" />
       <Separator
-        className="bg-slate-700 border border-dashed z-10 absolute left-0 h-[60vh]"
+        className="dark:bg-slate-800 bg-neutral-100 border border-dashed z-10 absolute left-0 h-[60vh]"
         orientation="vertical"
       />
       <Separator
-        className="bg-slate-700 border border-dashed z-10 absolute right-0 h-[60vh]"
+        className="dark:bg-slate-800 bg-neutral-100  border border-dashed z-10 absolute right-0 h-[60vh]"
         orientation="vertical"
       />
       <HomeOptions
@@ -42,7 +45,7 @@ export const Heading = () => {
         language="typescript"
         title="home"
       />
-      <Separator className="bg-slate-700 my-5 border border-dashed w-full md:w-[60vw]" />
+      <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[60vw]" />
 
       <div ref={container}>
         <div
@@ -58,12 +61,13 @@ export const Heading = () => {
           />
           <ReactCodeMirror
             className={cn(
-              "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base",
+              "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base"
             )}
             value={`${status === "authenticated" ? `${authenticatedContent}\n\nWelcome, ${session?.user?.name}\n` : `${content}`}`}
             extensions={[
               javascript({ jsx: true, typescript: true }),
               EditorView.lineWrapping,
+              highlightActiveLine(),
             ]}
             readOnly={false}
             theme="dark"
@@ -72,7 +76,7 @@ export const Heading = () => {
           />
         </div>
       </div>
-      <Separator className="bg-slate-700 my-5 border border-dashed w-full md:w-[60vw]" />
+      <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[60vw]" />
       <div>
         {status === "loading" && (
           <div className="w-full flex items-center justify-center">
@@ -90,7 +94,7 @@ export const Heading = () => {
         {status === "unauthenticated" && <Social />}
       </div>
 
-      <Separator className="bg-slate-700 my-5 border border-dashed w-full md:w-[60vw]" />
+      <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[60vw]" />
     </div>
   );
 };

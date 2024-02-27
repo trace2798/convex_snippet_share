@@ -78,7 +78,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
             snipperAuthorId={snippet?.userId}
           />
         </Background>
-        {data?.user.id == snippet?.userId && data?.user.aiCount && (
+        {data?.user.id == snippet?.userId && data?.user.aiCount && !preview && (
           <HoverCard>
             <HoverCardTrigger>
               {" "}
@@ -127,7 +127,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
           </div>
         )}
         {snippet?.notes && preview && (
-          <Card className="mx-[5vw] my-5 border-none max-w-3xl">
+          <Card className="mx-[5vw] backdrop-blur-lg bg-inherit my-5 border-none max-w-3xl">
             {snippet.notes.split("\n").map((paragraph, index) => (
               <CardDescription key={index} className="p-1">
                 {paragraph}

@@ -45,7 +45,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
   };
   return (
     <>
-      <div className="w-full py-3 px-3 pl-4 dark:bg-zinc-900 flex justify-between items-center text-sm">
+      <div className="w-full py-3 px-3 pl-4 bg-zinc-900 flex justify-between items-center text-sm">
         <div className="text-muted-foreground items-center flex">
           <h1>{title}</h1>
           <span>{fileExtension}</span>
@@ -59,7 +59,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
             {copiedText ? (
               <CopyCheck className="w-5 h-5 text-green-600" />
             ) : (
-              <Copy className="w-5 h-5 hover:text-indigo-700" />
+              <Copy className="w-5 h-5 text-zinc-600 hover:text-indigo-700" />
             )}
           </button>
         </div>

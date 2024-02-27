@@ -3,7 +3,11 @@ import { api } from "@/convex/_generated/api";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { SUPPORTED_LANGUAGES } from "@/lib/language";
 import { cn } from "@/lib/utils";
-import ReactCodeMirror, { EditorView, ViewUpdate } from "@uiw/react-codemirror";
+import ReactCodeMirror, {
+  EditorView,
+  ViewUpdate,
+  highlightActiveLine,
+} from "@uiw/react-codemirror";
 import { FC, useEffect, useState } from "react";
 import { toast } from "sonner";
 import CodeTitleBar from "./code-title-bar";
@@ -45,7 +49,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
   useEffect(() => {
     // Find the selected language in your SUPPORTED_LANGUAGES array
     const languageDefinition = SUPPORTED_LANGUAGES.find(
-      (lang) => lang.id === language,
+      (lang) => lang.id === language
     );
 
     let fileExtension = "";
@@ -82,14 +86,18 @@ const CodeEditor: FC<CodeEditorProps> = ({
 
         <ReactCodeMirror
           className={cn(
-            "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto",
+            "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto"
           )}
           style={{
             fontSize: `${textSize}`,
           }}
           value={`${content}`}
           lang={`${language}`}
-          extensions={[extension ? [extension] : [], EditorView.lineWrapping]}
+          extensions={[
+            extension ? [extension] : [],
+            EditorView.lineWrapping,
+            highlightActiveLine(),
+          ]}
           readOnly={false}
           theme={"dark"}
           placeholder="//Enter code snippet here..."

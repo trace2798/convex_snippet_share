@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="dark:bg-gradient-to-r dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 dark:via-90% bg-gradient-to-r from-neutral-100 via-sky-300 to-neutral-200 via-60%">
         <SessionProvider>
           <ConvexClientProvider>
             <ThemeProvider

@@ -27,13 +27,13 @@ const Background: FC<BackgroundProps> = ({ children, snippet }) => {
         isPublic={snippet?.isPublic ?? false}
         id={snippet?._id}
       />
-      <Card className="border-none mb-3">
+      <Card className="border-none mb-3 bg-inherit">
         <CardDescription>Views: {snippet?.viewCount}</CardDescription>
       </Card>
       <div
         ref={container}
         className={cn(
-          "flex top-0 justify-center w-fit items-center rounded-xl",
+          "flex top-0 justify-center w-fit items-center rounded-xl max-w-3xl"
         )}
         style={{ background: bg ?? background, padding: pd }} // Use the background state to set the background color
       >
