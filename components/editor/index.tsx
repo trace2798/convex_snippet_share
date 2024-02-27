@@ -88,7 +88,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
                 onClick={() =>
                   handleSendMessage(
                     snippet?.content ?? "Content",
-                    snippet?.language ?? "typescript",
+                    snippet?.language ?? "typescript"
                   )
                 }
                 className="font-medium mt-5 hover:text-indigo-400"

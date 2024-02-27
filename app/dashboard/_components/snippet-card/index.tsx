@@ -64,9 +64,9 @@ export const SnippetCard = ({
 
   return (
     <Link href={`/dashboard/snippet/${id}`}>
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div className="text-sm">{title}</div>
+      <Card className="group hover:cursor-pointer hover:backdrop-blur-sm hover:shadow-sm dark:hover:shadow-indigo-200 hover:shadow-indigo-900">
+        <CardHeader className="flex  flex-row items-center justify-between">
+          <div className="text-sm group-hover:text-base group-hover:text-zinc-800 dark:group-hover:text-indigo-400">{title}</div>
           <div>
             <Actions id={id} title={title} side="right">
               <button className="">
@@ -75,7 +75,9 @@ export const SnippetCard = ({
             </Actions>
           </div>
         </CardHeader>
-        <CardFooter className="text-sm">{createdAtLabel}</CardFooter>
+        <CardFooter className="text-sm dark:group-hover:text-indigo-300">
+          {createdAtLabel}
+        </CardFooter>
       </Card>
     </Link>
   );
