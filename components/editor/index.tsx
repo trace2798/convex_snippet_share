@@ -88,7 +88,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
                 onClick={() =>
                   handleSendMessage(
                     snippet?.content ?? "Content",
-                    snippet?.language ?? "typescript"
+                    snippet?.language ?? "typescript",
                   )
                 }
                 className="font-medium mt-5 hover:text-indigo-400"
@@ -111,7 +111,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
           <div className="mt-5 w-full flex justify-center items-center flex-col">
             <Textarea
               disabled={isSaving || pending}
-              className="max-w-3xl min-h-[300px] backdrop-blur-lg bg-inherit border-none w-[90%] focus:outline-none focus:ring-0 focus:border-none focus:shadow-none"
+              className="max-w-3xl min-h-[300px] backdrop-blur-sm bg-inherit border-none w-[90%] focus:outline-none focus:ring-0 focus:border-none focus:shadow-none scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
               value={originalcontent}
               onChange={(event) => handleNoteChange(event.target.value)}
             >

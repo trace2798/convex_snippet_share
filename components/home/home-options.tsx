@@ -63,7 +63,7 @@ const HomeOptions: FC<HomeOptionsProps> = ({
             <HoverCardTrigger>
               {" "}
               <Button
-                variant="outline"
+                variant="ghost"
                 className=""
                 onClick={() => exportToPng(container.current, title)}
               >
@@ -79,7 +79,7 @@ const HomeOptions: FC<HomeOptionsProps> = ({
         <HoverCard>
           <HoverCardTrigger>
             {" "}
-            <Button variant="outline" onClick={handleDownload}>
+            <Button variant="ghost" onClick={handleDownload}>
               <DownloadIcon className="h-4 w-4" />
             </Button>
           </HoverCardTrigger>
@@ -93,7 +93,7 @@ const HomeOptions: FC<HomeOptionsProps> = ({
             <HoverCardTrigger>
               {" "}
               <Button
-                variant="outline"
+                variant="ghost"
                 onClick={onCopy}
                 disabled={copied}
                 className=""

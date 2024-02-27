@@ -92,12 +92,7 @@ const Options: FC<OptionsProps> = ({
           <HoverCard>
             <HoverCardTrigger>
               {" "}
-              <Button
-                variant="outline"
-                onClick={onCopy}
-                disabled={copied}
-                className="h-8 rounded-l-none"
-              >
+              <Button variant="outline" onClick={onCopy} disabled={copied}>
                 {copied ? (
                   <Check className="h-4 w-4" />
                 ) : (

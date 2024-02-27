@@ -33,7 +33,7 @@ const Background: FC<BackgroundProps> = ({ children, snippet }) => {
       <div
         ref={container}
         className={cn(
-          "flex top-0 justify-center w-fit items-center rounded-xl max-w-3xl"
+          "flex top-0 justify-center w-fit items-center rounded-xl max-w-3xl",
         )}
         style={{ background: bg ?? background, padding: pd }} // Use the background state to set the background color
       >
