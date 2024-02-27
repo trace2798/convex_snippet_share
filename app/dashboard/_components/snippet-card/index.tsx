@@ -70,7 +70,7 @@ export const SnippetCard = ({
           <div>
             <Actions id={id} title={title} side="right">
               <button className="">
-                <MoreHorizontal className="text-white opacity-75 hover:opacity-100 transition-opacity" />
+                <MoreHorizontal className=" opacity-75 hover:opacity-100 transition-opacity" />
               </button>
             </Actions>
           </div>
