@@ -39,7 +39,6 @@ export const SnippetCard = ({
   orgId,
   isFavorite,
 }: SnippetCardProps) => {
-  // const { userId } = useAuth();
   const currentUser = useCurrentUser();
   console.log("CurrentUSer ===>", currentUser);
   const authorLabel = userId === userId ? "You" : authorName;

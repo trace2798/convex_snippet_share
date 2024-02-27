@@ -18,6 +18,8 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "../ui/hover-card";
+import { Skeleton } from "../ui/skeleton";
+import { Spinner } from "../spinner";
 
 interface EditorProps {
   snippet: Snippet;
@@ -28,17 +30,21 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   const { data } = useSession();
   console.log("DATA ===>", data);
   const [originalcontent, setOriginalcontent] = useState(snippet?.notes);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const sendMessage = useAction(api.openai.chat);
+
   if (!snippet) <>Loading</>;
   const { mutate, pending } = useApiMutation(api.snippet.updateNote);
   const handleSendMessage = async (text: string, language: string) => {
+    setIsGenerating(true);
     await sendMessage({
       content: text,
       snippetId: snippet?._id,
       language: language,
       userId: snippet?.userId,
     });
+    setIsGenerating(false);
   };
 
   useEffect(() => {
@@ -83,12 +89,12 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
             <HoverCardTrigger>
               {" "}
               <Button
-                disabled={pending || data?.user.aiCount >= 10}
+                disabled={pending || data?.user.aiCount >= 10 || isGenerating}
                 aria-label="Explain With AI"
                 onClick={() =>
                   handleSendMessage(
                     snippet?.content ?? "Content",
-                    snippet?.language ?? "typescript",
+                    snippet?.language ?? "typescript"
                   )
                 }
                 className="font-medium mt-5 hover:text-indigo-400"
@@ -109,20 +115,32 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
 
         {snippet && !preview && (
           <div className="mt-5 w-full flex justify-center items-center flex-col">
-            <Textarea
+            {/* <Textarea
               disabled={isSaving || pending}
               className="max-w-3xl min-h-[300px] backdrop-blur-sm bg-inherit border-none w-[90%] focus:outline-none focus:ring-0 focus:border-none focus:shadow-none scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
               value={originalcontent}
               onChange={(event) => handleNoteChange(event.target.value)}
             >
-              {snippet?.notes}
-            </Textarea>
+              {isGenerating ? <Skeleton className="h-14 w-[50%]" /> : snippet?.notes}
+            </Textarea> */}
+            {isGenerating ? (
+              <Skeleton className="h-14 w-[50%]" />
+            ) : (
+              <Textarea
+                disabled={isSaving || pending}
+                className="max-w-3xl min-h-[300px] backdrop-blur-sm bg-inherit border-none w-[90%] focus:outline-none focus:ring-0 focus:border-none focus:shadow-none scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+                value={originalcontent}
+                onChange={(event) => handleNoteChange(event.target.value)}
+              >
+                {snippet?.notes}
+              </Textarea>
+            )}
             <Button
               onClick={handleSave}
               disabled={isSaving || originalcontent === snippet?.notes}
               className="mt-5 w-[180px]"
             >
-              {isSaving ? "Saving..." : "Save"}
+              {isSaving ? <Spinner size="lg" /> : "Save"}
             </Button>
           </div>
         )}

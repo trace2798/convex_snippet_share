@@ -80,7 +80,7 @@ export const chat = action({
         snippetId: args.snippetId as Id<"snippets">,
         content: messageContent || "",
       });
-      return messageContent;
+      // return messageContent;
     } catch (error) {
       console.log(error);
     }
