@@ -59,9 +59,7 @@ const page: FC<pageProps> = ({}) => {
                   </CardTitle>
                   <CardDescription>{activity.snippetId}</CardDescription>
                 </CardHeader>
-                <CardContent className="prose prose-invert">
-                  {activity.ai_answer}
-                </CardContent>
+                <CardContent className="">{activity.ai_answer}</CardContent>
               </Card>
             </>
           ))}

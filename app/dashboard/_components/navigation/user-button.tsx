@@ -38,9 +38,7 @@ const UserButton: FC<UserButtonProps> = ({}) => {
             <Avatar className="relative w-8 h-8">
               {data.user.image ? (
                 <div className="relative aspect-square h-full w-full">
-                  <Avatar>
-                    <AvatarImage src={data.user.image} />
-                  </Avatar>
+                  <AvatarImage src={data.user.image} />
                 </div>
               ) : (
                 <AvatarFallback>
