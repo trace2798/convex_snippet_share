@@ -11,7 +11,6 @@ export const Navbar = () => {
           <Link href="/">
             <h1>Snippet Share</h1>
           </Link>
-
           <ModeToggle />
         </div>
       </div>
