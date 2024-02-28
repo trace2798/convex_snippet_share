@@ -13,9 +13,7 @@ import { usePaginatedQuery } from "convex/react";
 import { formatDistanceToNow } from "date-fns";
 import { useSession } from "next-auth/react";
 import { SnippetCard } from "../_components/snippet-card";
-
-interface AiActivityPageProps {}
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 
 const AiActivityPage = ({}) => {
   const { data } = useSession();
@@ -24,7 +22,7 @@ const AiActivityPage = ({}) => {
     {
       userId: data?.user?.id as Id<"users">,
     },
-    { initialNumItems: 2 }
+    { initialNumItems: 2 },
   );
   useEffect(() => {
     const handleScroll = () => {
