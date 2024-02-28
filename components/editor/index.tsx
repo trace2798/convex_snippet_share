@@ -89,35 +89,38 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
             snipperAuthorId={snippet?.userId}
           />
         </Background>
-        {data?.user.id == snippet?.userId && data?.user.aiCount && !preview && (
-          <HoverCard>
-            <HoverCardTrigger>
-              {" "}
-              <Button
-                disabled={pending || data?.user.aiCount >= 10 || isGenerating}
-                aria-label="Explain With AI"
-                onClick={() =>
-                  handleSendMessage(
-                    snippet?.content ?? "Content",
-                    snippet?.language ?? "typescript",
-                    data?.user.id as Id<"users">
-                  )
-                }
-                className="font-medium mt-5 hover:text-indigo-400"
-                variant="ghost"
-              >
-                <Sparkles className="hover:text-indigo-400 w-5 h-5" />
-                &nbsp; Explain Content with AI
-              </Button>
-            </HoverCardTrigger>
-            <HoverCardContent className="text-sm">
-              10 AI generation for free. <br />
-              <span className="text-muted-foreground">
-                Current Count: {data.user.aiCount}
-              </span>
-            </HoverCardContent>
-          </HoverCard>
-        )}
+        {data?.user.id == snippet?.userId &&
+          data?.user.aiCount !== undefined &&
+          data?.user.aiCount !== null &&
+          !preview && (
+            <HoverCard>
+              <HoverCardTrigger>
+                {" "}
+                <Button
+                  disabled={pending || data?.user.aiCount >= 10 || isGenerating}
+                  aria-label="Explain With AI"
+                  onClick={() =>
+                    handleSendMessage(
+                      snippet?.content ?? "Content",
+                      snippet?.language ?? "typescript",
+                      data?.user.id as Id<"users">
+                    )
+                  }
+                  className="font-medium mt-5 hover:text-indigo-400"
+                  variant="ghost"
+                >
+                  <Sparkles className="hover:text-indigo-400 w-5 h-5" />
+                  &nbsp; Explain Content with AI
+                </Button>
+              </HoverCardTrigger>
+              <HoverCardContent className="text-sm">
+                10 AI generation for free. <br />
+                <span className="text-muted-foreground">
+                  Current Count: {data.user.aiCount}
+                </span>
+              </HoverCardContent>
+            </HoverCard>
+          )}
 
         {snippet && !preview && (
           <div className="mt-5 w-full flex justify-center items-center flex-col">
