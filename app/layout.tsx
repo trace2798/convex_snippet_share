@@ -10,7 +10,7 @@ import { ModalProvider } from "@/providers/modal-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Code Share",
+  title: "Snippet Share",
   description: "Share code snippets with anyone",
 };
 

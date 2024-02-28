@@ -1,5 +1,4 @@
 import { Heading } from "@/components/home/heading";
-import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const MarketingPage = () => {

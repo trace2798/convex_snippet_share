@@ -10,12 +10,13 @@ import ReactCodeMirror, {
 import { ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Social } from "../auth/social";
 import CodeTitleBar from "../editor/code-title-bar";
 import { Spinner } from "../spinner";
 import { Separator } from "../ui/separator";
 import HomeOptions from "./home-options";
+import MovingLine from "../moving-line";
 
 const content = `Easily share your code snippet with anyone.\n\nLogin to get started\n`;
 
@@ -28,7 +29,8 @@ export const Heading = () => {
 
   return (
     <div className="relative max-w-3xl space-y-4 justify-center flex flex-col items-center align-middle">
-      <Separator className="dark:bg-slate-800 bg-neutral-100 border border-dashed md:w-[60vw]" />
+      {/* <Separator className="dark:bg-slate-800 bg-neutral-100 border border-dashed md:w-[80vw] lg:w-[60vw]" /> */}
+      <MovingLine />
       <Separator
         className="dark:bg-slate-800 bg-neutral-100 border border-dashed z-10 absolute left-0 h-[60vh]"
         orientation="vertical"
@@ -45,9 +47,9 @@ export const Heading = () => {
         language="typescript"
         title="home"
       />
-      <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[60vw]" />
-
-      <div ref={container}>
+      {/* <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[80vw] lg:w-[60vw]" /> */}
+      <MovingLine />
+      <div ref={container} className="z-50">
         <div
           ref={container}
           className="p-10 bg-gradient-to-r from-blue-200 via-sky-500 to-blue-400 rounded-lg"
@@ -61,7 +63,7 @@ export const Heading = () => {
           />
           <ReactCodeMirror
             className={cn(
-              "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base",
+              "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base z-[9999]"
             )}
             value={`${status === "authenticated" ? `${authenticatedContent}\n\nWelcome, ${session?.user?.name}\n` : `${content}`}`}
             extensions={[
@@ -76,15 +78,16 @@ export const Heading = () => {
           />
         </div>
       </div>
-      <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[60vw]" />
-      <div>
+      {/* <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[80vw] lg:w-[60vw]" /> */}
+      <MovingLine />
+      <div className="z-50">
         {status === "loading" && (
           <div className="w-full flex items-center justify-center">
             <Spinner size="lg" />
           </div>
         )}
         {status === "authenticated" && (
-          <Button asChild className="w-[180px]">
+          <Button asChild className="w-[180px] z-50">
             <Link href="/dashboard">
               Dashboard
               <ArrowRight className="h-4 w-4 ml-2" />
@@ -93,8 +96,8 @@ export const Heading = () => {
         )}
         {status === "unauthenticated" && <Social />}
       </div>
-
-      <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[60vw]" />
+      {/* <Separator className="dark:bg-slate-800 bg-neutral-100 my-5 border border-dashed w-full md:w-[80vw] lg:w-[60vw]" /> */}
+      <MovingLine />
     </div>
   );
 };

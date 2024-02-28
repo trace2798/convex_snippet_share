@@ -57,7 +57,7 @@ const HomeOptions: FC<HomeOptionsProps> = ({
 
   return (
     <>
-      <div className="w-[300px] flex flex-row md:flex-wrap justify-evenly items-center my-6">
+      <div className="w-[300px] flex flex-row md:flex-wrap justify-evenly items-center my-6 z-50">
         {content ? (
           <HoverCard>
             <HoverCardTrigger>
