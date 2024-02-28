@@ -6,24 +6,42 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { useQuery } from "convex/react";
+import { usePaginatedQuery } from "convex/react";
 import { formatDistanceToNow } from "date-fns";
 import { useSession } from "next-auth/react";
-import { FC } from "react";
 import { SnippetCard } from "../_components/snippet-card";
-import { Skeleton } from "@/components/ui/skeleton";
 
 interface AiActivityPageProps {}
+import { FC, useEffect } from "react";
 
-const AiActivityPageProps: FC<AiActivityPageProps> = ({}) => {
+const AiActivityPage = ({}) => {
   const { data } = useSession();
-  const activities = useQuery(api.aiactivity.get, {
-    userId: data?.user?.id as Id<"users">,
-  });
-  console.log(activities);
-  if (activities === undefined) {
+  const { results, status, loadMore } = usePaginatedQuery(
+    api.aiactivity.get,
+    {
+      userId: data?.user?.id as Id<"users">,
+    },
+    { initialNumItems: 2 }
+  );
+  useEffect(() => {
+    const handleScroll = () => {
+      const page = document.documentElement;
+      const closeToBottom =
+        page.scrollHeight - page.scrollTop - page.clientHeight < 100;
+      if (closeToBottom && status === "CanLoadMore") {
+        loadMore(1);
+      }
+    };
+    handleScroll();
+    document.addEventListener("scroll", handleScroll);
+    return () => document.removeEventListener("scroll", handleScroll);
+  }, [status, loadMore]);
+
+  console.log(results);
+  if (results === undefined) {
     return (
       <div>
         <h2 className="text-3xl"></h2>
@@ -37,7 +55,7 @@ const AiActivityPageProps: FC<AiActivityPageProps> = ({}) => {
     );
   }
 
-  if (!activities?.length) {
+  if (!results?.length) {
     return (
       <>
         <p>No activities found</p>
@@ -50,7 +68,7 @@ const AiActivityPageProps: FC<AiActivityPageProps> = ({}) => {
       <div>
         <h1 className="my-10 font-bold text-xl">Activities</h1>
         <div className="space-y-4">
-          {activities?.map((activity, index) => (
+          {results?.map((activity, index) => (
             <>
               <Card key={index} className="">
                 <CardHeader>
@@ -63,13 +81,16 @@ const AiActivityPageProps: FC<AiActivityPageProps> = ({}) => {
               </Card>
             </>
           ))}
+          {/* <button onClick={() => loadMore(5)} disabled={status !== "CanLoadMore"}>
+        Load More
+      </button> */}
         </div>
       </div>
     </>
   );
 };
-
-export default AiActivityPageProps;
+export default AiActivityPage;
+// export default AiActivityPageProps;
 
 SnippetCard.Skeleton = function SnippetCardSkeleton() {
   return (

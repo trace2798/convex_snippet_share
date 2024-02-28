@@ -1,10 +1,12 @@
 import { v } from "convex/values";
 import { internalMutation, query } from "./_generated/server";
 import { Id } from "./_generated/dataModel";
+import { paginationOptsValidator } from "convex/server";
 
 export const get = query({
   args: {
     userId: v.string(),
+    paginationOpts: paginationOptsValidator,
   },
 
   handler: async (ctx, args) => {
@@ -19,7 +21,8 @@ export const get = query({
       .query("aiactivity")
       .withIndex("userId", (q) => q.eq("userId", args.userId as Id<"users">))
       .order("desc")
-      .collect();
+      .paginate(args.paginationOpts);
+    // .collect();
 
     return activities;
   },

@@ -7,6 +7,7 @@ import {
   ActivityIcon,
   Building,
   Code,
+  Code2Icon,
   LayoutDashboard,
   PersonStanding,
 } from "lucide-react";
@@ -18,7 +19,7 @@ export const NavigationSidebar = () => {
     <>
       <div className="space-y-4 flex flex-col items-center h-full text-primary w-full backdrop-blur-md shadow-sm border-r py-3">
         <Link href="/">
-          <Code className="h-7 w-7 hover:cursor-pointer hover:text-indigo-400" />
+          <Code2Icon className="h-7 w-7 hover:cursor-pointer hover:text-indigo-400" />
         </Link>
         <Link href="/dashboard">
           <LayoutDashboard className="h-7 w-7 mt-10 hover:cursor-pointer hover:text-indigo-400" />
