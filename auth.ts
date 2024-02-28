@@ -19,13 +19,13 @@ export const {
   callbacks: {
     async signIn({ account }) {
       // Allow OAuth without email verification
-      console.log("ACCOUNT", account);
+      // console.log("ACCOUNT", account);
       if (account?.provider !== "credentials") return true;
       return true;
     },
     async session({ token, session }) {
-      console.log(token);
-      console.log(session);
+      // console.log(token);
+      // console.log(session);
 
       return session;
     },
@@ -34,8 +34,8 @@ export const {
       // const existingUser = useQuery(api.users.get, {
       //   id: token.sub as Id<"users">,
       // })
-      // console.log(existingUser);
-      console.log(token);
+      // // console.log(existingUser);
+      // console.log(token);
 
       return token;
     },

@@ -31,7 +31,7 @@ export const SnippetCard = ({
   isFavorite,
 }: SnippetCardProps) => {
   const currentUser = useCurrentUser();
-  console.log("CurrentUSer ===>", currentUser);
+  // console.log("CurrentUSer ===>", currentUser);
   const authorLabel = userId === userId ? "You" : authorName;
   const createdAtLabel = formatDistanceToNow(createdAt, {
     addSuffix: true,

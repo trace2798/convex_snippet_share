@@ -11,7 +11,7 @@ export const get = query({
 
   handler: async (ctx, args) => {
     const user = await ctx.db.get(args.userId as Id<"users">);
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       throw new Error("Unauthorized");

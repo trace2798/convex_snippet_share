@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function exportToPng(dom: any, title: string) {
-  console.log(dom, "dom");
+  // console.log(dom, "dom");
   const titleParts = title.split("/");
   const lastPartOfTitle = titleParts[titleParts.length - 1];
   domtoimage
@@ -17,7 +17,7 @@ export function exportToPng(dom: any, title: string) {
     .then(function (dataUrl) {
       saveAs(dataUrl, `${lastPartOfTitle}.png`);
       toast.success("Picture downloaded");
-      console.log("dataUrl", dataUrl);
+      // console.log("dataUrl", dataUrl);
     })
     .catch(function (error) {
       toast.error("Failed to download picture");

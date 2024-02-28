@@ -28,7 +28,7 @@ interface EditorProps {
 
 const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   const { data } = useSession();
-  console.log("DATA ===>", data);
+  // console.log("DATA ===>", data);
   const [originalcontent, setOriginalcontent] = useState(snippet?.notes);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);

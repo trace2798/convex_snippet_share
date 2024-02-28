@@ -13,7 +13,7 @@ export const EmptySnippets = () => {
   const router = useRouter();
   const { data } = useSession();
   const userId = data?.user?.id;
-  console.log(userId);
+  // console.log(userId);
 
   const { mutate, pending } = useApiMutation(api.snippet.create);
 

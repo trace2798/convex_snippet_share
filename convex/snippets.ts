@@ -11,7 +11,7 @@ export const get = query({
 
   handler: async (ctx, args) => {
     const user = await ctx.db.get(args.userId as Id<"users">);
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       throw new Error("Unauthorized");
@@ -31,7 +31,7 @@ export const getById = query({
   args: { snippetId: v.id("snippets") },
   handler: async (ctx, args) => {
     // const identity = await ctx.auth.getUserIdentity();
-    // console.log("IDENTITY ===>", identity);
+    // // console.log("IDENTITY ===>", identity);
     const snippet = await ctx.db.get(args.snippetId);
 
     if (!snippet) {
@@ -64,7 +64,7 @@ export const getById = query({
     //   .query("presence")
     //   .withIndex("by_user", (q) => q.eq("userId", userId))
     //   .unique();
-    // console.log(presence);
+    // // console.log(presence);
     // if (presence) {
     //   await ctx.db.patch(presence._id, {
     //     lastActive: Date.now(),

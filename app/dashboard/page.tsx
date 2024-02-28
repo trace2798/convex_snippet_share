@@ -9,7 +9,7 @@ interface PersonalPageProps {}
 const PersonalPage: FC<PersonalPageProps> = ({}) => {
   const { data } = useSession();
 
-  console.log(data?.user?.id);
+  // console.log(data?.user?.id);
   return (
     <>
       <SnippetList userId={data?.user?.id as Id<"users">} />

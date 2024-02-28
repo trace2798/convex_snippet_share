@@ -43,7 +43,7 @@ export const chat = action({
     //   for await (const part of response) {
     //     if (part.choices[0].delta?.content) {
     //       messageContent += part.choices[0].delta.content;
-    //       console.log("MESSAGE CONTENT", messageContent);
+    //       // console.log("MESSAGE CONTENT", messageContent);
     //       // Alternatively you could wait for complete words / sentences.
     //       // Here we send an update on every stream message.
     //       await ctx.runMutation(api.snippet.updateNote, {
@@ -61,13 +61,13 @@ export const chat = action({
     //     content: messageContent,
     //   });
     // } catch (error) {
-    //   console.log(error);
+    //   // console.log(error);
     // }
 
     // Pull the message content out of the response
     try {
       const messageContent = response.choices[0].message?.content;
-      console.log("MESSAGE CONTENT", messageContent);
+      // console.log("MESSAGE CONTENT", messageContent);
       await ctx.runMutation(api.snippet.updateNote, {
         id: args.snippetId as Id<"snippets">,
         notes: messageContent ?? "",
@@ -83,7 +83,7 @@ export const chat = action({
       });
       // return messageContent;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   },
 });

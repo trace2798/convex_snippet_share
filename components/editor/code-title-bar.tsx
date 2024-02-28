@@ -24,7 +24,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
   const handleCopy = (text: string) => () => {
     copy(text)
       .then(() => {
-        console.log("Copied!", { text });
+        // console.log("Copied!", { text });
       })
       .catch((error) => {
         console.error("Failed to copy!", error);

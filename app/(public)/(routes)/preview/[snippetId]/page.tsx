@@ -23,7 +23,7 @@ const SnippetIdPage = ({ params }: SnippetIdPageProps) => {
 
   const { mutate, pending } = useApiMutation(api.snippet.incrementCount);
 
-  console.log(snippet);
+  // console.log(snippet);
 
   useEffect(() => {
     if (snippet && !countIncremented) {

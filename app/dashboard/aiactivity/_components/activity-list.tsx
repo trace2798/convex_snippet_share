@@ -29,7 +29,7 @@ const ActivityList = ({ userId }: { userId: string }) => {
     },
     { initialNumItems: 2 }
   );
-  console.log(results);
+  // console.log(results);
 
   useEffect(() => {
     if (!results) return;
@@ -48,7 +48,7 @@ const ActivityList = ({ userId }: { userId: string }) => {
     return () => document.removeEventListener("scroll", handleScroll);
   }, [status, loadMore, results]); // add 'results' to the dependency array
 
-  console.log(results);
+  // console.log(results);
   if (results === undefined) {
     return (
       <div className="flex flex-col space-y-5">

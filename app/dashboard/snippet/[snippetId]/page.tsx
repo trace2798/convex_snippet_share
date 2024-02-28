@@ -17,7 +17,7 @@ const SnippetIdPage = ({ params }: SnippetIdPageProps) => {
     snippetId: params.snippetId as Id<"snippets">,
   }) as Snippet;
 
-  console.log(snippet);
+  // console.log(snippet);
   const { data } = useSession();
   return (
     <>

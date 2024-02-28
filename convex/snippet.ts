@@ -14,9 +14,9 @@ export const create = mutation({
     //     if (!identity) {
     //       throw new Error("Unauthorized");
     //     }
-    // console.log("IDENTITY",identity)
+    // // console.log("IDENTITY",identity)
     const user = await ctx.db.get(args.userId as Id<"users">);
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       throw new Error("Unauthorized. User Id is required.");
@@ -71,7 +71,7 @@ export const updateBackgroundColor = mutation({
   },
   handler: async (ctx, args) => {
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+    //// console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
@@ -96,11 +96,11 @@ export const updateLanguage = mutation({
   args: { id: v.id("snippets"), language: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+    //// console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
+    //// console.log(author);
     const user = await ctx.db.get(args.userId as Id<"users">);
 
     if (!user) {
@@ -122,7 +122,7 @@ export const updateTextSize = mutation({
   args: { id: v.id("snippets"), textSize: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+    //// console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
@@ -147,7 +147,7 @@ export const updatePadding = mutation({
   args: { id: v.id("snippets"), padding: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+    //// console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
@@ -172,7 +172,7 @@ export const updateTitle = mutation({
   args: { id: v.id("snippets"), title: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+    //// console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
@@ -197,7 +197,7 @@ export const updateVisibility = mutation({
   args: { id: v.id("snippets"), isPublic: v.boolean(), userId: v.id("users") },
   handler: async (ctx, args) => {
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+    //// console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }

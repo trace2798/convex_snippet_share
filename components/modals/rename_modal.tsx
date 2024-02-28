@@ -44,7 +44,7 @@ export const RenameModal = () => {
         onClose();
       })
       .catch(() => toast.error("Failed to rename snippet"));
-    // .catch((error) => console.log(error));
+    // .catch((error) => // console.log(error));
   };
 
   return (

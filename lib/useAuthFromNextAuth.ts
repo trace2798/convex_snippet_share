@@ -3,8 +3,8 @@ import { useCallback, useMemo } from "react";
 
 export function useAuthFromNextAuth() {
   const { data, status } = useSession();
-  console.log(data);
-  console.log(status);
+  // console.log(data);
+  // console.log(status);
   const fetchAccessToken = useCallback(
     async ({ forceRefreshToken }: { forceRefreshToken: boolean }) => {
       if (forceRefreshToken) {
