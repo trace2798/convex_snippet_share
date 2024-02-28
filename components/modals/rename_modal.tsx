@@ -17,8 +17,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
+import { useSession } from "next-auth/react";
 
 export const RenameModal = () => {
+  const { data } = useSession();
   const { mutate, pending } = useApiMutation(api.snippet.updateTitle);
 
   const { isOpen, onClose, initialValues } = useRenameModal();
@@ -35,12 +37,13 @@ export const RenameModal = () => {
     mutate({
       id: initialValues.id,
       title,
+      userId: data?.user.id,
     })
       .then(() => {
-        toast.success("Board renamed");
+        toast.success("Snippet renamed");
         onClose();
       })
-      .catch(() => toast.error("Failed to rename board"));
+      .catch(() => toast.error("Failed to rename snippet"));
     // .catch((error) => console.log(error));
   };
 

@@ -19,7 +19,7 @@ export const create = mutation({
     console.log(user);
 
     if (!user) {
-      throw new Error("Unauthorized");
+      throw new Error("Unauthorized. User Id is required.");
     }
 
     const snippet = await ctx.db.insert("snippets", {
@@ -40,26 +40,21 @@ export const create = mutation({
 });
 
 export const updateContent = mutation({
-  args: { id: v.id("snippets"), content: v.string() },
+  args: { id: v.id("snippets"), content: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
+
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
     const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
       content: args.content,
     });
@@ -69,33 +64,25 @@ export const updateContent = mutation({
 });
 
 export const updateBackgroundColor = mutation({
-  args: { id: v.id("snippets"), backgroundColor: v.string() },
+  args: {
+    id: v.id("snippets"),
+    backgroundColor: v.string(),
+    userId: v.id("users"),
+  },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-
-    // const author = await ctx.db
-    //   .query("users")
-    //   .withIndex("tokenIdentifier", (q) =>
-    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
-    //   )
-    //   .unique();
-
     const existingSnippet = await ctx.db.get(args.id);
     //console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
+
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
 
     const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
       backgroundColor: args.backgroundColor,
@@ -106,32 +93,22 @@ export const updateBackgroundColor = mutation({
 });
 
 export const updateLanguage = mutation({
-  args: { id: v.id("snippets"), language: v.string() },
+  args: { id: v.id("snippets"), language: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-    // const author = await ctx.db
-    //   .query("users")
-    //   .withIndex("tokenIdentifier", (q) =>
-    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
-    //   )
-    //   .unique();
-
     const existingSnippet = await ctx.db.get(args.id);
     //console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
     //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
+
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
 
     const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
       language: args.language,
@@ -142,33 +119,21 @@ export const updateLanguage = mutation({
 });
 
 export const updateTextSize = mutation({
-  args: { id: v.id("snippets"), textSize: v.string() },
+  args: { id: v.id("snippets"), textSize: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-
-    // const author = await ctx.db
-    //   .query("users")
-    //   .withIndex("tokenIdentifier", (q) =>
-    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
-    //   )
-    //   .unique();
-
     const existingSnippet = await ctx.db.get(args.id);
     //console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
+
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
 
     const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
       textSize: args.textSize,
@@ -179,33 +144,21 @@ export const updateTextSize = mutation({
 });
 
 export const updatePadding = mutation({
-  args: { id: v.id("snippets"), padding: v.string() },
+  args: { id: v.id("snippets"), padding: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-
-    // const author = await ctx.db
-    //   .query("users")
-    //   .withIndex("tokenIdentifier", (q) =>
-    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
-    //   )
-    //   .unique();
-
     const existingSnippet = await ctx.db.get(args.id);
     //console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
+
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
 
     const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
       padding: args.padding,
@@ -216,33 +169,21 @@ export const updatePadding = mutation({
 });
 
 export const updateTitle = mutation({
-  args: { id: v.id("snippets"), title: v.string() },
+  args: { id: v.id("snippets"), title: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-
-    // const author = await ctx.db
-    //   .query("users")
-    //   .withIndex("tokenIdentifier", (q) =>
-    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
-    //   )
-    //   .unique();
-
     const existingSnippet = await ctx.db.get(args.id);
     //console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
+
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
 
     const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
       title: args.title,
@@ -253,33 +194,21 @@ export const updateTitle = mutation({
 });
 
 export const updateVisibility = mutation({
-  args: { id: v.id("snippets"), isPublic: v.boolean() },
+  args: { id: v.id("snippets"), isPublic: v.boolean(), userId: v.id("users") },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-
-    // const author = await ctx.db
-    //   .query("users")
-    //   .withIndex("tokenIdentifier", (q) =>
-    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
-    //   )
-    //   .unique();
-
     const existingSnippet = await ctx.db.get(args.id);
     //console.log("EXTENTING SNIPPET", existingSnippet);
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
+
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
 
     const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
       isPublic: args.isPublic,
@@ -290,34 +219,21 @@ export const updateVisibility = mutation({
 });
 
 export const deleteSnippet = mutation({
-  args: { id: v.id("snippets") },
+  args: { id: v.id("snippets"), userId: v.id("users") },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-
-    // const author = await ctx.db
-    //   .query("users")
-    //   .withIndex("tokenIdentifier", (q) =>
-    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
-    //   )
-    //   .unique();
-
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
 
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
     const snippet = await ctx.db.delete(args.id as Id<"snippets">);
 
     return snippet;
@@ -325,34 +241,21 @@ export const deleteSnippet = mutation({
 });
 
 export const updateNote = mutation({
-  args: { id: v.id("snippets"), notes: v.string() },
+  args: { id: v.id("snippets"), notes: v.string(), userId: v.id("users") },
   handler: async (ctx, args) => {
-    // const identity = await ctx.auth.getUserIdentity();
-
-    // if (!identity) {
-    //   throw new Error("Unauthorized");
-    // }
-
-    // const author = await ctx.db
-    //   .query("users")
-    //   .withIndex("tokenIdentifier", (q) =>
-    //     q.eq("tokenIdentifier", identity.tokenIdentifier)
-    //   )
-    //   .unique();
-
     const existingSnippet = await ctx.db.get(args.id);
-    //console.log("EXTENTING SNIPPET", existingSnippet);
+
     if (!existingSnippet) {
       return null;
     }
-    //console.log(author);
-    // if (!author) {
-    //   return null;
-    // }
-    // if (existingSnippet?.authorId !== author._id) {
-    //   throw new Error("Unauthorized");
-    // }
+    const user = await ctx.db.get(args.userId as Id<"users">);
 
+    if (!user) {
+      throw new Error("Unauthorized. User Id is required.");
+    }
+    if (existingSnippet?.userId !== user._id) {
+      throw new Error("Unauthorized");
+    }
     const snippet = await ctx.db.patch(args.id as Id<"snippets">, {
       notes: args.notes,
     });

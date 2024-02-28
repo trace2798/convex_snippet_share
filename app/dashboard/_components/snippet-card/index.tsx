@@ -1,22 +1,13 @@
 "use client";
 
-import { toast } from "sonner";
-import Link from "next/link";
-import Image from "next/image";
-import { MoreHorizontal } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
-
-import { api } from "@/convex/_generated/api";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-// import { useApiMutation } from "@/hooks/use-api-mutation";
-
-import { Footer } from "./footer";
-import { Overlay } from "./overlay";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-// import { Actions } from "@/components/actions";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { formatDistanceToNow } from "date-fns";
+import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
 import { Actions } from "./actions";
-// import { Actions } from "@/components/actions";
+
 
 interface SnippetCardProps {
   id: string;

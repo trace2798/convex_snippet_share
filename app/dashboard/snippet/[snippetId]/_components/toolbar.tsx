@@ -1,3 +1,4 @@
+"use client";
 import { GradientPicker } from "@/components/gradient-picker";
 import {
   HoverCard,
@@ -25,6 +26,7 @@ import { useTextSizeStore } from "@/store/textsize";
 import { useVisibilityStore } from "@/store/visibility";
 import { Snippet } from "@/typing";
 import * as Switch from "@radix-ui/react-switch";
+import { useSession } from "next-auth/react";
 import { FC, useEffect } from "react";
 import { toast } from "sonner";
 
@@ -33,6 +35,7 @@ interface ToolbarProps {
 }
 
 const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
+  const { data } = useSession();
   const { mutate, pending } = useApiMutation(api.snippet.updateBackgroundColor);
 
   const { mutate: mutateLanguage, pending: pendingLanguageChange } =
@@ -87,6 +90,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutate({
       id: id as Id<"snippets">,
       backgroundColor: background,
+      userId: data?.user.id,
     })
       .then(() => {
         toast.success("Background Updated");
@@ -98,6 +102,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutateLanguage({
       id: id as Id<"snippets">,
       language: language,
+      userId: data?.user.id,
     })
       .then(() => {
         toast.success("Language Updated");
@@ -109,6 +114,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutateTextSize({
       id: id as Id<"snippets">,
       textSize: textSize,
+      userId: data?.user.id,
     })
       .then(() => {
         toast.success("Text Size Updated");
@@ -120,6 +126,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutatePaddingSize({
       id: id as Id<"snippets">,
       padding: padding,
+      userId: data?.user.id,
     })
       .then(() => {
         toast.success("Padding Size Updated");
@@ -131,6 +138,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutateVisibility({
       id: id as Id<"snippets">,
       isPublic: isPublic,
+      userId: data?.user.id,
     })
       .then(() => {
         toast.success("Visibility Updated");
@@ -143,7 +151,6 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-6 pl-5 pt-5">
         <div>
           <h1 className="text-sm mb-2 text-muted-foreground">Background</h1>
-          {/* <br /> */}
           <GradientPicker
             background={snippet?.backgroundColor ?? background}
             setBackground={(background: string) => {

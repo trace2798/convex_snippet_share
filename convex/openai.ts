@@ -71,6 +71,7 @@ export const chat = action({
       await ctx.runMutation(api.snippet.updateNote, {
         id: args.snippetId as Id<"snippets">,
         notes: messageContent ?? "",
+        userId: args.userId as Id<"users">,
       });
       await ctx.runMutation(internal.users.increaseUserAICount, {
         userId: args.userId as Id<"users">,

@@ -1,21 +1,21 @@
 "use client";
 
-import { toast } from "sonner";
-import { Link2, Pencil, Trash2 } from "lucide-react";
 import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
+import { Link2, Pencil, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
+import { ConfirmModal } from "@/components/modals/confirm-modal";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { api } from "@/convex/_generated/api";
 import { useApiMutation } from "@/hooks/use-api-mutation";
-import { Button } from "@/components/ui/button";
 import { useRenameModal } from "@/store/use-rename-modal";
-import { ConfirmModal } from "@/components/modals/confirm-modal";
+import { useSession } from "next-auth/react";
 
 interface ActionsProps {
   children: React.ReactNode;
@@ -34,7 +34,7 @@ export const Actions = ({
 }: ActionsProps) => {
   const { onOpen } = useRenameModal();
   const { mutate, pending } = useApiMutation(api.snippet.deleteSnippet);
-
+  const { data } = useSession();
   const onCopyLink = () => {
     navigator.clipboard
       .writeText(`${window.location.origin}/preview/${id}`)
@@ -43,7 +43,7 @@ export const Actions = ({
   };
 
   const onDelete = () => {
-    mutate({ id })
+    mutate({ id, userId: data?.user.id })
       .then(() => toast.success("Snippet deleted"))
       .catch(() => toast.error("Failed to delete snippet"));
   };

@@ -60,6 +60,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
     mutate({
       id: snippet?._id,
       notes: originalcontent,
+      userId: data?.user.id,
     })
       .then(() => {
         toast.success("Note Updated");
