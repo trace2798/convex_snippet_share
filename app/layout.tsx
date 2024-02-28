@@ -12,6 +12,14 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Snippet Share",
   description: "Share code snippets with anyone",
+  openGraph: {
+    title: "Snippet Share",
+    description: "Share code snippets with anyone",
+    images: [`/api/og?title=SnippetShare`],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
