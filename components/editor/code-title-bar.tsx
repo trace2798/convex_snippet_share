@@ -1,10 +1,7 @@
 "use client";
-import { api } from "@/convex/_generated/api";
 import { useRenameModal } from "@/store/use-rename-modal";
-import { useAction, useMutation } from "convex/react";
-import { Copy, CopyCheck, Sparkles } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { ElementRef, FC, useRef, useState } from "react";
+import { Copy, CopyCheck } from "lucide-react";
+import { FC } from "react";
 import { useCopyToClipboard } from "usehooks-ts";
 
 interface CodeTitleBarProps {
@@ -22,20 +19,8 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
   snippetId,
   snipperAuthorId,
 }) => {
-  //  console.log("TITLE ===>", title);
   const { onOpen } = useRenameModal();
-  const inputRef = useRef<ElementRef<"textarea">>(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [value, setValue] = useState(title);
-  const update = useMutation(api.snippet.updateTitle);
   const [copiedText, copy] = useCopyToClipboard();
-  const sendMessage = useAction(api.openai.chat);
-  const [newMessageText, setNewMessageText] = useState("");
-  // async function handleSendMessage(event: React.FormEvent<HTMLFormElement>) {
-  // const handleSendMessage = async (text: string) => {
-  //   await sendMessage({ content: text, snippetId: snippetId });
-  // };
-
   const handleCopy = (text: string) => () => {
     copy(text)
       .then(() => {
