@@ -124,7 +124,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
               {isGenerating ? <Skeleton className="h-14 w-[50%]" /> : snippet?.notes}
             </Textarea> */}
             {isGenerating ? (
-              <Skeleton className="h-14 w-[50%]" />
+              <Skeleton className="h-14 w-[50%] bg-gradient-to-r from-zinc-950 to-zinc-900 via-indigo-900" />
             ) : (
               <Textarea
                 disabled={isSaving || pending}

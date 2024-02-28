@@ -1,7 +1,7 @@
 "use client";
-import { FC } from "react";
 import { Id } from "@/convex/_generated/dataModel";
 import { useSession } from "next-auth/react";
+import { FC } from "react";
 import { SnippetList } from "./_components/snippet-list";
 
 interface PersonalPageProps {}

@@ -5,6 +5,7 @@ import { api } from "@/convex/_generated/api";
 import { EmptySnippets } from "./empty-snippets";
 import { NewSnippetButton } from "./new-snippet-button";
 import { SnippetCard } from "./snippet-card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface SnippetListProps {
   userId: string;
@@ -74,6 +75,7 @@ export const SnippetList = ({ userId }: SnippetListProps) => {
             isFavorite={snippet.isFavorite}
           />
         ))}
+        {/* <Skeleton/> */}
       </div>
     </div>
   );
