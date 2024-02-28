@@ -97,7 +97,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
               <HoverCardTrigger>
                 {" "}
                 <Button
-                  disabled={pending || data?.user.aiCount >= 10 || isGenerating}
+                  disabled={pending || data?.user.aiCount >= 10 || isGenerating || snippet.content?.length == 0}
                   aria-label="Explain With AI"
                   onClick={() =>
                     handleSendMessage(
