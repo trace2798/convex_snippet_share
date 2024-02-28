@@ -22,7 +22,7 @@ const AiActivityPage = ({}) => {
     {
       userId: data?.user?.id as Id<"users">,
     },
-    { initialNumItems: 2 },
+    { initialNumItems: 2 }
   );
   useEffect(() => {
     const handleScroll = () => {
@@ -79,16 +79,12 @@ const AiActivityPage = ({}) => {
               </Card>
             </>
           ))}
-          {/* <button onClick={() => loadMore(5)} disabled={status !== "CanLoadMore"}>
-        Load More
-      </button> */}
         </div>
       </div>
     </>
   );
 };
 export default AiActivityPage;
-// export default AiActivityPageProps;
 
 SnippetCard.Skeleton = function SnippetCardSkeleton() {
   return (
