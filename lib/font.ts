@@ -1,4 +1,3 @@
-
 export type SizesDefinition = {
   id: string;
   label: string;

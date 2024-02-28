@@ -33,7 +33,7 @@ const MovingLine: FC<MovingLineProps> = ({}) => {
     path.current?.setAttributeNS(
       null,
       "d",
-      `M0 250 Q${width * x} ${250 + progress}, ${width} 250`
+      `M0 250 Q${width * x} ${250 + progress}, ${width} 250`,
     );
   };
 
