@@ -14,14 +14,14 @@ import { formatDistanceToNow } from "date-fns";
 import { useEffect } from "react";
 
 const ActivityList = ({ userId }: { userId: string }) => {
-  if (!userId) {
-    return (
-      <div className="flex flex-col space-y-5">
-        <ActivityList.Skeleton />
-        <ActivityList.Skeleton />
-      </div>
-    );
-  }
+  // if (!userId) {
+  //   return (
+  //     <div className="flex flex-col space-y-5">
+  //       <ActivityList.Skeleton />
+  //       <ActivityList.Skeleton />
+  //     </div>
+  //   );
+  // }
   const { results, status, loadMore } = usePaginatedQuery(
     api.aiactivity.get,
     {
