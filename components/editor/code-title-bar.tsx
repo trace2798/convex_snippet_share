@@ -1,5 +1,6 @@
 "use client";
 import { api } from "@/convex/_generated/api";
+import { useRenameModal } from "@/store/use-rename-modal";
 import { useAction, useMutation } from "convex/react";
 import { Copy, CopyCheck, Sparkles } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -22,6 +23,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
   snipperAuthorId,
 }) => {
   //  console.log("TITLE ===>", title);
+  const { onOpen } = useRenameModal();
   const inputRef = useRef<ElementRef<"textarea">>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(title);
@@ -46,8 +48,11 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
   return (
     <>
       <div className="w-full py-3 px-3 pl-4 bg-zinc-900 flex justify-between items-center text-sm">
-        <div className="text-muted-foreground items-center flex">
-          <h1>{title}</h1>
+        <div
+          className="text-muted-foreground items-center flex"
+          onClick={() => onOpen(snippetId, title)}
+        >
+          <h1 className="hover:cursor-pointer">{title}</h1>
           <span>{fileExtension}</span>
         </div>
         <div className="flex space-x-4">
