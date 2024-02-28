@@ -1,9 +1,3 @@
-// import { LanguageDefinition } from "./types";
-import {
-  type LanguageSupport as LS,
-  type StreamParser,
-} from "@codemirror/language";
-import type { Extension } from "@codemirror/state";
 
 export type SizesDefinition = {
   id: string;
