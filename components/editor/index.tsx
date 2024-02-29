@@ -11,6 +11,9 @@ import { toast } from "sonner";
 import { Spinner } from "../spinner";
 import { Button } from "../ui/button";
 import { Card, CardDescription } from "../ui/card";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import {
   HoverCard,
   HoverCardContent,
@@ -162,8 +165,12 @@ const Editor: FC<EditorProps> = ({
                 key={index}
                 className="p-1 prose dark:prose-invert"
               >
-                {/* {paragraph} */}
-                <div dangerouslySetInnerHTML={{ __html: paragraph }} />
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  className="text-base prose dark:prose-invert prose-ul:m-0 prose-li:m-0 prose-p:my-0 prose-h3:my-0"
+                >
+                  {paragraph}
+                </ReactMarkdown>
               </CardDescription>
             ))}
           </Card>
