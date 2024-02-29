@@ -5,10 +5,11 @@ import { usePaddingStore } from "@/store/padding";
 import { FC, useRef } from "react";
 import Options from "./options";
 import { Card, CardDescription } from "../ui/card";
+import { Snippet } from "@/typing";
 
 interface BackgroundProps {
   children: React.ReactNode;
-  snippet: any;
+  snippet: Snippet;
 }
 
 const Background: FC<BackgroundProps> = ({ children, snippet }) => {
@@ -23,7 +24,7 @@ const Background: FC<BackgroundProps> = ({ children, snippet }) => {
         container={container}
         language={snippet?.language}
         title={snippet?.title}
-        content={snippet?.content}
+        content={snippet?.content ?? ""}
         isPublic={snippet?.isPublic ?? false}
         id={snippet?._id}
       />

@@ -23,6 +23,7 @@ interface ActionsProps {
   sideOffset?: DropdownMenuContentProps["sideOffset"];
   id: string;
   title: string;
+  userId: string
 }
 
 export const Actions = ({

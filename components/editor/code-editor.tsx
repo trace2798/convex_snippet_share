@@ -11,17 +11,15 @@ import ReactCodeMirror, {
 import { FC, useEffect, useState } from "react";
 import { toast } from "sonner";
 import CodeTitleBar from "./code-title-bar";
-import { Card, CardContent } from "../ui/card";
-import { useSession } from "next-auth/react";
 
 interface CodeEditorProps {
   id: string;
   content: string;
   language: string;
-  padding: string;
   textSize: string;
   title: string;
   snipperAuthorId: string;
+  currentUserId?: string;
 }
 export type ContentEditableEvent = React.SyntheticEvent<any, Event> & {
   target: {
@@ -33,13 +31,13 @@ const CodeEditor: FC<CodeEditorProps> = ({
   id,
   content,
   language,
-  padding,
   textSize,
   title,
   snipperAuthorId,
+  currentUserId,
 }) => {
   const { mutate, pending } = useApiMutation(api.snippet.updateContent);
-  const { data } = useSession();
+  // const { data } = useSession();
   const [originalcontent, setOriginalcontent] = useState(content);
   const [extension, setExtension] = useState<any>(null);
   const [fileExtension, setFileExtension] = useState("");
@@ -50,7 +48,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
   useEffect(() => {
     // Find the selected language in your SUPPORTED_LANGUAGES array
     const languageDefinition = SUPPORTED_LANGUAGES.find(
-      (lang) => lang.id === language,
+      (lang) => lang.id === language
     );
 
     let fileExtension = "";
@@ -65,7 +63,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
     mutate({
       id: id,
       content: value,
-      userId: data?.user.id,
+      userId: currentUserId,
     })
       .then(() => {
         toast.success("Content Updated");
@@ -88,7 +86,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
 
         <ReactCodeMirror
           className={cn(
-            "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto",
+            "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto"
           )}
           style={{
             fontSize: `${textSize}`,

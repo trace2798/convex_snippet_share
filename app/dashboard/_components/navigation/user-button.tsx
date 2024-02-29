@@ -1,8 +1,6 @@
 "use client";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { signOut, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { FC, use } from "react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,9 +8,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { AvatarFallback } from "@radix-ui/react-avatar";
-import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { FC } from "react";
 
 interface UserButtonProps {}
 
@@ -22,7 +21,7 @@ const UserButton: FC<UserButtonProps> = ({}) => {
     return (
       <>
         <Avatar>
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>DP</AvatarFallback>
         </Avatar>
       </>
     );

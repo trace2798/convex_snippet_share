@@ -1,34 +1,40 @@
 "use client";
 import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { cn } from "@/lib/utils";
 import { Snippet } from "@/typing";
 import { useAction } from "convex/react";
 import { Sparkles } from "lucide-react";
-import { useSession } from "next-auth/react";
 import { FC, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Spinner } from "../spinner";
 import { Button } from "../ui/button";
 import { Card, CardDescription } from "../ui/card";
-import { Textarea } from "../ui/textarea";
-import Background from "./background";
-import CodeEditor from "./code-editor";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "../ui/hover-card";
 import { Skeleton } from "../ui/skeleton";
-import { Spinner } from "../spinner";
-import { Id } from "@/convex/_generated/dataModel";
+import { Textarea } from "../ui/textarea";
+import Background from "./background";
+import CodeEditor from "./code-editor";
 
 interface EditorProps {
   snippet: Snippet;
   preview?: boolean;
+  currentUserId?: string;
+  aiCount?: number;
 }
 
-const Editor: FC<EditorProps> = ({ snippet, preview }) => {
-  const { data } = useSession();
+const Editor: FC<EditorProps> = ({
+  snippet,
+  preview,
+  currentUserId,
+  aiCount,
+}) => {
+  // const { data } = useSession();
   const [originalcontent, setOriginalcontent] = useState(snippet?.notes);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -39,7 +45,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   const handleSendMessage = async (
     text: string,
     language: string,
-    userId: string,
+    userId: string
   ) => {
     setIsGenerating(true);
     await sendMessage({
@@ -64,7 +70,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
     mutate({
       id: snippet?._id,
       notes: originalcontent,
-      userId: data?.user.id,
+      userId: currentUserId,
     })
       .then(() => {
         toast.success("Note Updated");
@@ -84,14 +90,13 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
             content={snippet?.content ?? "Content"}
             language={snippet?.language ?? "typescript"}
             textSize={snippet?.textSize ?? "text-base"}
-            padding={snippet?.padding ?? "p-10"}
             title={snippet?.title ?? "untitled"}
             snipperAuthorId={snippet?.userId}
           />
         </Background>
-        {data?.user.id == snippet?.userId &&
-          data?.user.aiCount !== undefined &&
-          data?.user.aiCount !== null &&
+        {currentUserId == snippet?.userId &&
+          aiCount !== undefined &&
+          aiCount !== null &&
           !preview && (
             <HoverCard>
               <HoverCardTrigger>
@@ -99,7 +104,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
                 <Button
                   disabled={
                     pending ||
-                    data?.user.aiCount >= 10 ||
+                    aiCount >= 10 ||
                     isGenerating ||
                     snippet.content?.length == 0
                   }
@@ -108,7 +113,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
                     handleSendMessage(
                       snippet?.content ?? "Content",
                       snippet?.language ?? "typescript",
-                      data?.user.id as Id<"users">,
+                      currentUserId as Id<"users">
                     )
                   }
                   className="font-medium mt-5 hover:text-indigo-400"
@@ -121,7 +126,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
               <HoverCardContent className="text-sm">
                 10 AI generation for free. <br />
                 <span className="text-muted-foreground">
-                  Current Count: {data.user.aiCount}
+                  Current Count: {aiCount}
                 </span>
               </HoverCardContent>
             </HoverCard>

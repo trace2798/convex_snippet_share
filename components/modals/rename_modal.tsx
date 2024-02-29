@@ -51,9 +51,11 @@ export const RenameModal = () => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit board title</DialogTitle>
+          <DialogTitle>Edit snippet title</DialogTitle>
         </DialogHeader>
-        <DialogDescription>Enter a new title for this board</DialogDescription>
+        <DialogDescription>
+          Enter a new title for this snippet
+        </DialogDescription>
         <form onSubmit={onSubmit} className="space-y-4">
           <Input
             disabled={pending}
@@ -61,7 +63,7 @@ export const RenameModal = () => {
             maxLength={60}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Board title"
+            placeholder="Snippet title"
           />
           <DialogFooter>
             <DialogClose asChild>

@@ -32,10 +32,11 @@ import { toast } from "sonner";
 
 interface ToolbarProps {
   snippet: Snippet;
+  currentUserId?: string
 }
 
-const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
-  const { data } = useSession();
+const ToolBar: FC<ToolbarProps> = ({ snippet, currentUserId }) => {
+  // const { data } = useSession();
   const { mutate, pending } = useApiMutation(api.snippet.updateBackgroundColor);
 
   const { mutate: mutateLanguage, pending: pendingLanguageChange } =
@@ -90,7 +91,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutate({
       id: id as Id<"snippets">,
       backgroundColor: background,
-      userId: data?.user.id,
+      userId: currentUserId,
     })
       .then(() => {
         toast.success("Background Updated");
@@ -102,7 +103,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutateLanguage({
       id: id as Id<"snippets">,
       language: language,
-      userId: data?.user.id,
+      userId: currentUserId,
     })
       .then(() => {
         toast.success("Language Updated");
@@ -114,7 +115,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutateTextSize({
       id: id as Id<"snippets">,
       textSize: textSize,
-      userId: data?.user.id,
+      userId: currentUserId,
     })
       .then(() => {
         toast.success("Text Size Updated");
@@ -126,7 +127,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutatePaddingSize({
       id: id as Id<"snippets">,
       padding: padding,
-      userId: data?.user.id,
+      userId: currentUserId,
     })
       .then(() => {
         toast.success("Padding Size Updated");
@@ -138,7 +139,7 @@ const ToolBar: FC<ToolbarProps> = ({ snippet }) => {
     mutateVisibility({
       id: id as Id<"snippets">,
       isPublic: isPublic,
-      userId: data?.user.id,
+      userId: currentUserId,
     })
       .then(() => {
         toast.success("Visibility Updated");

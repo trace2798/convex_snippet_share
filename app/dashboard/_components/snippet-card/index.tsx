@@ -2,7 +2,6 @@
 
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { formatDistanceToNow } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
@@ -11,45 +10,19 @@ import { Actions } from "./actions";
 interface SnippetCardProps {
   id: string;
   title: string;
-  authorName: string;
   userId: string;
   createdAt: number;
-  imageUrl: string;
-  orgId: string;
-  isFavorite: boolean;
 }
 
 export const SnippetCard = ({
   id,
   title,
   userId,
-  authorName,
   createdAt,
-  imageUrl,
-  orgId,
-  isFavorite,
 }: SnippetCardProps) => {
-  const currentUser = useCurrentUser();
-  // console.log("CurrentUSer ===>", currentUser);
-  const authorLabel = userId === userId ? "You" : authorName;
   const createdAtLabel = formatDistanceToNow(createdAt, {
     addSuffix: true,
   });
-
-  // const { mutate: onFavorite, pending: pendingFavorite } = useApiMutation(
-  //   api.board.favorite
-  // );
-  // const { mutate: onUnfavorite, pending: pendingUnfavorite } = useApiMutation(
-  //   api.board.unfavorite
-  // );
-
-  // const toggleFavorite = () => {
-  //   if (isFavorite) {
-  //     onUnfavorite({ id }).catch(() => toast.error("Failed to unfavorite"));
-  //   } else {
-  //     onFavorite({ id, orgId }).catch(() => toast.error("Failed to favorite"));
-  //   }
-  // };
 
   return (
     <Link href={`/dashboard/snippet/${id}`}>
@@ -59,7 +32,7 @@ export const SnippetCard = ({
             {title}
           </div>
           <div>
-            <Actions id={id} title={title} side="right">
+            <Actions id={id} title={title} side="right" userId={userId}>
               <button className="">
                 <MoreHorizontal className=" opacity-75 hover:opacity-100 transition-opacity" />
               </button>

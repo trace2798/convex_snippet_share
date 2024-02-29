@@ -9,10 +9,10 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-export const EmptySnippets = () => {
+export const EmptySnippets = ({ userId }: { userId: string }) => {
   const router = useRouter();
-  const { data } = useSession();
-  const userId = data?.user?.id;
+  // const { data } = useSession();
+  // const userId = data?.user?.id;
   // console.log(userId);
 
   const { mutate, pending } = useApiMutation(api.snippet.create);
@@ -28,8 +28,8 @@ export const EmptySnippets = () => {
         toast.success("Snippet created");
         router.push(`/dashboard/snippet/${id}`);
       })
-      // .catch(() => toast.error("Failed to create snippet"));
-      .catch((error) => console.error(error));
+      .catch(() => toast.error("Failed to create snippet"));
+      // .catch((error) => console.error(error));
   };
 
   if (!userId) {
