@@ -63,7 +63,7 @@ export const Heading = () => {
           />
           <ReactCodeMirror
             className={cn(
-              "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base z-[9999]",
+              "w-auto min-w-[250px] max-w-[5xl] max-h-[100%] overflow-y-auto text-base z-[9999]"
             )}
             value={`${status === "authenticated" ? `${authenticatedContent}\n\nWelcome, ${session?.user?.name}\n` : `${content}`}`}
             extensions={[
