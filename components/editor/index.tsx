@@ -163,7 +163,7 @@ const Editor: FC<EditorProps> = ({
             {snippet.notes.split("\n").map((paragraph, index) => (
               <CardDescription key={index} className="p-1">
                 <ReactMarkdown
-                  remarkPlugins={[remarkGfm, remarkMath]}
+                  // remarkPlugins={[remarkGfm, remarkMath]}
                   className="text-base prose dark:prose-invert"
                 >
                   {paragraph}
