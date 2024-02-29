@@ -1,37 +1,37 @@
-import ConvexClientProvider from "@/providers/convex-client-provider";
-import type { Metadata } from "next";
-import { SessionProvider } from "next-auth/react";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { ModalProvider } from "@/providers/modal-provider";
 import { siteConfig } from "@/lib/site";
+import ConvexClientProvider from "@/providers/convex-client-provider";
+import { ModalProvider } from "@/providers/modal-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { SessionProvider } from "next-auth/react";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const twitterCreator = siteConfig.twitterUsername;
-
-const twitterSite = siteConfig.links.twitter;
 
 export const metadata = {
-  metadataBase: siteConfig.url,
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.description}`,
+  title: siteConfig.name,
+  description: siteConfig.description,
+  keywords: ["Next.js", "Convex"],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
   },
-  robots: {
-    follow: true,
-    index: true,
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [`${siteConfig.url}/og.jpg`],
+    creator: siteConfig.twitterUsername,
   },
-  ...(twitterCreator &&
-    twitterSite && {
-      twitter: {
-        card: "summary_large_image",
-        creator: twitterCreator,
-        site: twitterSite,
-      },
-    }),
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: `${siteConfig.url}site.webmanifest`,
 };
 
 export default function RootLayout({
