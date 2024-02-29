@@ -164,11 +164,11 @@ const Editor: FC<EditorProps> = ({
               <CardDescription
                 key={index}
                 className="p-1"
-                style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
+                // style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
               >
                 <ReactMarkdown
                   // remarkPlugins={[remarkGfm, remarkMath]}
-                  className="text-base prose dark:prose-invert"
+                  className="text-base break-words prose dark:prose-invert"
                 >
                   {paragraph}
                 </ReactMarkdown>
