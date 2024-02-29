@@ -158,7 +158,10 @@ const Editor: FC<EditorProps> = ({
         {snippet?.notes && preview && (
           <Card className="mx-[5vw] backdrop-blur-lg bg-inherit my-5 border-none max-w-3xl">
             {snippet.notes.split("\n").map((paragraph, index) => (
-              <CardDescription key={index} className="p-1 prose prose-invert">
+              <CardDescription
+                key={index}
+                className="p-1 prose dark:prose-invert"
+              >
                 {/* {paragraph} */}
                 <div dangerouslySetInnerHTML={{ __html: paragraph }} />
               </CardDescription>
