@@ -57,20 +57,20 @@ const HomeOptions: FC<HomeOptionsProps> = ({
 
   return (
     <>
-      <div className="w-[300px] flex flex-row md:flex-wrap justify-evenly items-center my-6 z-50">
+      <div className="w-[300px] flex flex-row md:flex-wrap justify-evenly items-center my-6 z-50 ">
         {content ? (
           <HoverCard>
             <HoverCardTrigger>
               {" "}
               <Button
                 variant="ghost"
-                className=""
+                className="hover:text-indigo-400"
                 onClick={() => exportToPng(container.current, title)}
               >
                 <Image className="h-4 w-4" />
               </Button>
             </HoverCardTrigger>
-            <HoverCardContent className="text-sm">
+            <HoverCardContent className="text-xs">
               Download as PNG
             </HoverCardContent>
           </HoverCard>
@@ -79,11 +79,15 @@ const HomeOptions: FC<HomeOptionsProps> = ({
         <HoverCard>
           <HoverCardTrigger>
             {" "}
-            <Button variant="ghost" onClick={handleDownload}>
+            <Button
+              variant="ghost"
+              className="hover:text-indigo-400"
+              onClick={handleDownload}
+            >
               <DownloadIcon className="h-4 w-4" />
             </Button>
           </HoverCardTrigger>
-          <HoverCardContent className="text-sm">
+          <HoverCardContent className="text-xs">
             Download as file
           </HoverCardContent>
         </HoverCard>
@@ -96,7 +100,7 @@ const HomeOptions: FC<HomeOptionsProps> = ({
                 variant="ghost"
                 onClick={onCopy}
                 disabled={copied}
-                className=""
+                className="hover:text-indigo-400"
               >
                 {copied ? (
                   <Check className="h-4 w-4" />
@@ -105,7 +109,7 @@ const HomeOptions: FC<HomeOptionsProps> = ({
                 )}
               </Button>
             </HoverCardTrigger>
-            <HoverCardContent className="text-sm">
+            <HoverCardContent className="text-xs">
               Link to Share
             </HoverCardContent>
           </HoverCard>

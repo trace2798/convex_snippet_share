@@ -8,7 +8,6 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { Actions } from "./actions";
 
-
 interface SnippetCardProps {
   id: string;
   title: string;

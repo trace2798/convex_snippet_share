@@ -6,20 +6,32 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { ModalProvider } from "@/providers/modal-provider";
+import { siteConfig } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Snippet Share",
-  description: "Share code snippets with anyone",
-  openGraph: {
-    title: "Snippet Share",
-    description: "Share code snippets with anyone",
-    images: [`/api/og?title=SnippetShare`],
+const twitterCreator = siteConfig.twitterUsername;
+
+const twitterSite = siteConfig.links.twitter;
+
+export const metadata = {
+  metadataBase: siteConfig.url,
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.description}`,
   },
-  twitter: {
-    card: "summary_large_image",
+  robots: {
+    follow: true,
+    index: true,
   },
+  ...(twitterCreator &&
+    twitterSite && {
+      twitter: {
+        card: "summary_large_image",
+        creator: twitterCreator,
+        site: twitterSite,
+      },
+    }),
 };
 
 export default function RootLayout({

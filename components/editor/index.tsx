@@ -39,7 +39,7 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
   const handleSendMessage = async (
     text: string,
     language: string,
-    userId: string
+    userId: string,
   ) => {
     setIsGenerating(true);
     await sendMessage({
@@ -97,13 +97,18 @@ const Editor: FC<EditorProps> = ({ snippet, preview }) => {
               <HoverCardTrigger>
                 {" "}
                 <Button
-                  disabled={pending || data?.user.aiCount >= 10 || isGenerating || snippet.content?.length == 0}
+                  disabled={
+                    pending ||
+                    data?.user.aiCount >= 10 ||
+                    isGenerating ||
+                    snippet.content?.length == 0
+                  }
                   aria-label="Explain With AI"
                   onClick={() =>
                     handleSendMessage(
                       snippet?.content ?? "Content",
                       snippet?.language ?? "typescript",
-                      data?.user.id as Id<"users">
+                      data?.user.id as Id<"users">,
                     )
                   }
                   className="font-medium mt-5 hover:text-indigo-400"

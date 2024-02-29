@@ -27,7 +27,7 @@ const ActivityList = ({ userId }: { userId: string }) => {
     {
       userId: userId as Id<"users">,
     },
-    { initialNumItems: 2 }
+    { initialNumItems: 2 },
   );
   // console.log(results);
 
