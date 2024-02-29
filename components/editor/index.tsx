@@ -161,13 +161,10 @@ const Editor: FC<EditorProps> = ({
         {snippet?.notes && preview && (
           <Card className="mx-[5vw] backdrop-blur-lg bg-inherit my-5 border-none max-w-3xl">
             {snippet.notes.split("\n").map((paragraph, index) => (
-              <CardDescription
-                key={index}
-                className="p-1 prose dark:prose-invert"
-              >
+              <CardDescription key={index} className="p-1">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm, remarkMath]}
-                  className="text-base prose dark:prose-invert prose-ul:m-0 prose-li:m-0 prose-p:my-0 prose-h3:my-0"
+                  className="text-base prose dark:prose-invert"
                 >
                   {paragraph}
                 </ReactMarkdown>
