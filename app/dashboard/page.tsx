@@ -1,18 +1,32 @@
 "use client";
 import { Id } from "@/convex/_generated/dataModel";
 import { useSession } from "next-auth/react";
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import { SnippetList } from "./_components/snippet-list";
+import { stat } from "fs/promises";
+import { redirect } from "next/navigation";
+import { SnippetCard } from "./_components/snippet-card";
 
-interface PersonalPageProps {}
+interface DashboardPageProps {}
 
-const PersonalPage: FC<PersonalPageProps> = ({}) => {
-  const { data } = useSession();
+const DashboardPage: FC<DashboardPageProps> = ({}) => {
+  const { data, status } = useSession();
+  if (status === "loading")
+    return (
+      <>
+        <SnippetCard.Skeleton />
+      </>
+    );
+  if (status === "unauthenticated" || !data) {
+    redirect("/");
+  }
   return (
     <>
-      <SnippetList userId={data?.user?.id as Id<"users">} />
+      <Suspense fallback={<SnippetCard.Skeleton />}>
+        <SnippetList userId={data?.user?.id as Id<"users">} />
+      </Suspense>
     </>
   );
 };
 
-export default PersonalPage;
+export default DashboardPage;

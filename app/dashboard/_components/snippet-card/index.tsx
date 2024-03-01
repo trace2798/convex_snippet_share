@@ -47,7 +47,7 @@ export const SnippetCard = ({
   );
 };
 
-SnippetCard.Skeleton = function SnippetCardSkeleton() {
+SnippetCard.Skeleton =  function SnippetCardSkeleton() {
   return (
     <div className="aspect-[100/127] rounded-lg overflow-hidden">
       <Skeleton className="h-full w-full" />
