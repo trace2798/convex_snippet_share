@@ -29,7 +29,7 @@ export const chat = action({
         {
           // Provide a 'system' message to give GPT context about how to respond
           role: "system",
-          content: `Provide a brief explanation of what this code is doing. The code is written in ${args.language}. Generate the answer in a readable format with multiple paragraphs. `,
+          content: `Provide a brief explanation of what this code is doing. The code is written in ${args.language}. Generate the answer in markdown format. `,
         },
         {
           // Pass on the chat user's message to GPT
