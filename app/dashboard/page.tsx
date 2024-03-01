@@ -1,11 +1,10 @@
 "use client";
 import { Id } from "@/convex/_generated/dataModel";
 import { useSession } from "next-auth/react";
-import { FC, Suspense } from "react";
-import { SnippetList } from "./_components/snippet-list";
-import { stat } from "fs/promises";
 import { redirect } from "next/navigation";
+import { FC, Suspense } from "react";
 import { SnippetCard } from "./_components/snippet-card";
+import { SnippetList } from "./_components/snippet-list";
 
 interface DashboardPageProps {}
 
