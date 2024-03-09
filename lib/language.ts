@@ -156,4 +156,13 @@ export const SUPPORTED_LANGUAGES: LanguageDefinition[] = [
         import("@codemirror/legacy-modes/mode/shell"),
       ]).then(([cb, m]) => cb(m.shell)),
   },
+  {
+    id: "no language",
+    label: "No language",
+    fileExtension: "", // Added fileExtension property
+    extension: () =>
+      import("@codemirror/lang-javascript").then(({ javascript }) =>
+        javascript({ jsx: true, typescript: true })
+      ),
+  },
 ];
