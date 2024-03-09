@@ -12,8 +12,6 @@ import { Spinner } from "../spinner";
 import { Button } from "../ui/button";
 import { Card, CardDescription } from "../ui/card";
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
 import {
   HoverCard,
   HoverCardContent,
@@ -55,7 +53,7 @@ const Editor: FC<EditorProps> = ({
       content: text,
       snippetId: snippet?._id,
       language: language,
-      userId: userId as Id<"users">,
+      userId:  currentUserId as Id<"users">,
     });
     setIsGenerating(false);
   };
