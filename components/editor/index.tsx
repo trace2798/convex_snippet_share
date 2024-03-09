@@ -53,7 +53,7 @@ const Editor: FC<EditorProps> = ({
       content: text,
       snippetId: snippet?._id,
       language: language,
-      userId:  currentUserId as Id<"users">,
+      userId: userId as Id<"users">,
     });
     setIsGenerating(false);
   };
@@ -93,6 +93,7 @@ const Editor: FC<EditorProps> = ({
             textSize={snippet?.textSize ?? "text-base"}
             title={snippet?.title ?? "untitled"}
             snipperAuthorId={snippet?.userId}
+            currentUserId={currentUserId}
           />
         </Background>
         {currentUserId == snippet?.userId &&
