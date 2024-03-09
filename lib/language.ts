@@ -25,7 +25,7 @@ export const SUPPORTED_LANGUAGES: LanguageDefinition[] = [
     fileExtension: ".tsx", // Added fileExtension property
     extension: () =>
       import("@codemirror/lang-javascript").then(({ javascript }) =>
-        javascript({ jsx: true, typescript: true }),
+        javascript({ jsx: true, typescript: true })
       ),
   },
   {
@@ -34,7 +34,7 @@ export const SUPPORTED_LANGUAGES: LanguageDefinition[] = [
     fileExtension: ".ts", // Changed fileExtension property to .ts
     extension: () =>
       import("@codemirror/lang-javascript").then(
-        ({ javascript }) => javascript({ typescript: true }), // Removed jsx: true as .ts files don't typically contain JSX
+        ({ javascript }) => javascript({ typescript: true }) // Removed jsx: true as .ts files don't typically contain JSX
       ),
   },
   {
@@ -43,7 +43,7 @@ export const SUPPORTED_LANGUAGES: LanguageDefinition[] = [
     fileExtension: ".js", // Added fileExtension property
     extension: () =>
       import("@codemirror/lang-javascript").then(({ javascript }) =>
-        javascript({ jsx: false }),
+        javascript({ jsx: false })
       ),
   },
   {
@@ -52,7 +52,7 @@ export const SUPPORTED_LANGUAGES: LanguageDefinition[] = [
     fileExtension: ".jsx", // Added fileExtension property
     extension: () =>
       import("@codemirror/lang-javascript").then(({ javascript }) =>
-        javascript({ jsx: true }),
+        javascript({ jsx: true })
       ),
   },
   {
@@ -93,7 +93,7 @@ export const SUPPORTED_LANGUAGES: LanguageDefinition[] = [
     fileExtension: ".html", // Added fileExtension property
     extension: () =>
       import("@codemirror/lang-html").then(({ html }) =>
-        html({ matchClosingTags: true, autoCloseTags: true }),
+        html({ matchClosingTags: true, autoCloseTags: true })
       ),
   },
   {
@@ -145,5 +145,15 @@ export const SUPPORTED_LANGUAGES: LanguageDefinition[] = [
     label: "SQL",
     fileExtension: ".sql", // Added fileExtension property
     extension: () => import("@codemirror/lang-sql").then(({ sql }) => sql()),
+  },
+  {
+    id: "shell",
+    label: "Shell",
+    fileExtension: ".sh", // Added fileExtension property
+    extension: () =>
+      Promise.all([
+        importLegacy(),
+        import("@codemirror/legacy-modes/mode/shell"),
+      ]).then(([cb, m]) => cb(m.shell)),
   },
 ];
