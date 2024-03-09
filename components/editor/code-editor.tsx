@@ -20,6 +20,7 @@ interface CodeEditorProps {
   title: string;
   snipperAuthorId: string;
   currentUserId?: string;
+  readOnly?: boolean;
 }
 export type ContentEditableEvent = React.SyntheticEvent<any, Event> & {
   target: {
@@ -35,6 +36,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
   title,
   snipperAuthorId,
   currentUserId,
+  readOnly,
 }) => {
   const { mutate, pending } = useApiMutation(api.snippet.updateContent);
   // const { data } = useSession();
@@ -98,7 +100,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
             EditorView.lineWrapping,
             highlightActiveLine(),
           ]}
-          readOnly={false}
+          readOnly={readOnly ?? false}
           theme={"dark"}
           placeholder="//Enter code snippet here..."
           onChange={handleContentChange}

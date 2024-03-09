@@ -27,6 +27,7 @@ interface EditorProps {
   preview?: boolean;
   currentUserId?: string;
   aiCount?: number;
+  readOnly?: boolean;
 }
 
 const Editor: FC<EditorProps> = ({
@@ -34,6 +35,7 @@ const Editor: FC<EditorProps> = ({
   preview,
   currentUserId,
   aiCount,
+  readOnly,
 }) => {
   // const { data } = useSession();
   const [originalcontent, setOriginalcontent] = useState(snippet?.notes);
@@ -94,6 +96,7 @@ const Editor: FC<EditorProps> = ({
             title={snippet?.title ?? "untitled"}
             snipperAuthorId={snippet?.userId}
             currentUserId={currentUserId}
+            readOnly={readOnly}
           />
         </Background>
         {currentUserId == snippet?.userId &&
