@@ -36,7 +36,7 @@ const Options: FC<OptionsProps> = ({
       element.href = URL.createObjectURL(file);
       const titleParts = title.split("/");
       const lastPartOfTitle = titleParts[titleParts.length - 1];
-      element.download = `${lastPartOfTitle}${extension?.fileExtension}`;
+      element.download = `${lastPartOfTitle}`;
       document.body.appendChild(element); // Required for this to work in FireFox
       element.click();
       toast.success("File downloaded");

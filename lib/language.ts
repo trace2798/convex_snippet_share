@@ -161,8 +161,6 @@ export const SUPPORTED_LANGUAGES: LanguageDefinition[] = [
     label: "No language",
     fileExtension: "", // Added fileExtension property
     extension: () =>
-      import("@codemirror/lang-javascript").then(({ javascript }) =>
-        javascript({ jsx: true, typescript: true })
-      ),
+      import("@codemirror/lang-markdown").then(({ markdown }) => markdown()),
   },
 ];

@@ -5,6 +5,8 @@ import { FC } from "react";
 import { toast } from "sonner";
 import { useCopyToClipboard } from "usehooks-ts";
 import { Button } from "../ui/button";
+import { LanguageDefinition, SUPPORTED_LANGUAGES } from "@/lib/language";
+import { useLanguageStore } from "@/store/language";
 
 interface CodeTitleBarProps {
   title: string;
@@ -12,7 +14,7 @@ interface CodeTitleBarProps {
   fileExtension: string;
   snippetId: string;
   snipperAuthorId: string;
-  toolbarButtonDisable?: boolean
+  toolbarButtonDisable?: boolean;
 }
 
 const CodeTitleBar: FC<CodeTitleBarProps> = ({
@@ -25,6 +27,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
 }) => {
   const { onOpen } = useRenameModal();
   const [copiedText, copy] = useCopyToClipboard();
+  const { language, setLanguage } = useLanguageStore();
   const handleCopy = (text: string) => () => {
     copy(text)
       .then(() => {
@@ -45,7 +48,7 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
           disabled={toolbarButtonDisable ?? false}
         >
           <h1 className="hover:cursor-pointer">{title}</h1>
-          <span>{fileExtension}</span>
+          {/* <span>{fileExtension}</span> */}
         </button>
         <div className="flex space-x-4">
           <button
