@@ -60,6 +60,7 @@ export const Heading = () => {
             fileExtension=".tsx"
             snippetId=""
             snipperAuthorId=""
+            toolbarButtonDisable={true}
           />
           <ReactCodeMirror
             className={cn(
