@@ -67,7 +67,7 @@ const Options: FC<OptionsProps> = ({
                 className=""
                 onClick={() => exportToPng(container.current, title)}
               >
-                <Image className="h-4 w-4" />
+                <Image className="h-4 w-4 hover:text-indigo-500" />
               </Button>
             </HoverCardTrigger>
             <HoverCardContent className="text-sm">
@@ -80,7 +80,7 @@ const Options: FC<OptionsProps> = ({
           <HoverCardTrigger>
             {" "}
             <Button variant="outline" onClick={handleDownload}>
-              <DownloadIcon className="h-4 w-4" />
+              <DownloadIcon className="h-4 w-4 hover:text-indigo-500" />
             </Button>
           </HoverCardTrigger>
           <HoverCardContent className="text-sm">

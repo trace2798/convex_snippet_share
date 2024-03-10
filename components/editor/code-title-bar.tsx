@@ -4,9 +4,6 @@ import { Copy, CopyCheck } from "lucide-react";
 import { FC } from "react";
 import { toast } from "sonner";
 import { useCopyToClipboard } from "usehooks-ts";
-import { Button } from "../ui/button";
-import { LanguageDefinition, SUPPORTED_LANGUAGES } from "@/lib/language";
-import { useLanguageStore } from "@/store/language";
 
 interface CodeTitleBarProps {
   title: string;
@@ -27,27 +24,32 @@ const CodeTitleBar: FC<CodeTitleBarProps> = ({
 }) => {
   const { onOpen } = useRenameModal();
   const [copiedText, copy] = useCopyToClipboard();
-  const { language, setLanguage } = useLanguageStore();
   const handleCopy = (text: string) => () => {
     copy(text)
       .then(() => {
         toast.success("Copied to Clipboard");
-        // console.log("Copied!", { text });
       })
       .catch((error) => {
         toast.error("Failed to copy to Clipboard");
-        // console.error("Failed to copy!", error);
       });
   };
   return (
     <>
       <div className="w-full py-3 px-3 pl-4 bg-zinc-900 flex justify-between items-center text-sm">
-        <button
+        {/* <button
           className="text-muted-foreground items-center flex"
           onClick={() => onOpen(snippetId, title)}
           disabled={toolbarButtonDisable ?? false}
         >
           <h1 className="hover:cursor-pointer">{title}</h1>
+          {/* <span>{fileExtension}</span>
+        </button> */}
+        <button
+          className={`text-muted-foreground items-center flex ${toolbarButtonDisable ? "hover:cursor-not-allowed" : "hover:cursor-pointer"}`}
+          onClick={() => onOpen(snippetId, title)}
+          disabled={toolbarButtonDisable ?? false}
+        >
+          <h1>{title}</h1>
           {/* <span>{fileExtension}</span> */}
         </button>
         <div className="flex space-x-4">
